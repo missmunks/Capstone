@@ -3,7 +3,7 @@ const { Client } = require('pg');
 const DB_NAME = 'grace-shopper-db'
 const DB_URL = process.env.DATABASE_URL || `postgres://localhost:5432/${ DB_NAME }`;
 const client = new Client(DB_URL);
-const placeholderImg = require('./placeholder');
+// const placeholderImg = require('./placeholder');
 
 // database methods
 async function dropTables() {
@@ -39,7 +39,7 @@ async function buildTables() {
 		      "firstName" VARCHAR(255) NOT NULL,
 		      "lastName" VARCHAR(255) NOT NULL,
 		      email VARCHAR(255) UNIQUE NOT NULL,
-		      "imageURL" VARCHAR(255) DEFAULT "placeholderImg" NOT NULL,
+		      "imageURL" VARCHAR(255) NOT NULL,
 		      username VARCHAR(255) UNIQUE NOT NULL,
 		      password VARCHAR(255) UNIQUE NOT NULL,
 		      "isAdmin" BOOLEAN DEFAULT false
@@ -70,9 +70,7 @@ async function buildTables() {
 
 const createProduct = async ({name, description, price, imageUrl, inStock, category}) => {
 	try{
-		if(price.value.typeOf === ''){
-			console.error('price must be a number')
-		}
+		
 		const {rows: [product]} = await client.query(`
 			INSERT INTO products (name, description, price, "imageURL", "inStock", category)
 			VALUES($1, $2, $3, $4, $5, $6)

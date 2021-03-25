@@ -1,4 +1,4 @@
-# The Smallest Starting Point 
+# The Smallest Starting Point
 
 /*gulp...*/
 

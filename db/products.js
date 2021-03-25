@@ -5,7 +5,7 @@ const createProduct = async ({name, description, price, imageUrl, inStock, categ
 	console.log('starting to create products');
 	try{
 	const {rows: [product]} = await client.query(`
-		INSERT INTO products (name, description, price, "imageUrl", "inStock", category)
+		INSERT INTO products (name, description, price, "imageURL", "inStock", category)
 		VALUES($1, $2, $3, $4, $5, $6)
 		RETURNING *
 	`, [name, description, price, imageUrl, inStock, category]);

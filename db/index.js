@@ -29,8 +29,8 @@ async function buildTables() {
 		    name VARCHAR(255) NOT NULL,
 		    description VARCHAR(255) NOT NULL,
 		    price INTEGER NOT NULL,
-		    imageURL VARCHAR(255),
-		    inStock BOOLEAN DEFAULT false,
+		    "imageURL" VARCHAR(255),
+		    "inStock" BOOLEAN DEFAULT false,
 		    category VARCHAR(255) NOT NULL
 		  );
 		`);
@@ -40,7 +40,7 @@ async function buildTables() {
 		      firstName VARCHAR(255) NOT NULL,
 		      lastName VARCHAR(255) NOT NULL,
 		      email VARCHAR(255) UNIQUE NOT NULL,
-		      imageURL VARCHAR(255) NOT NULL,
+		      "imageURL" VARCHAR(255) NOT NULL,
 		      username VARCHAR(255) NOT NULL,
 		      password VARCHAR(255) UNIQUE NOT NULL,
 		      "isAdmin" BOOLEAN DEFAULT false
@@ -73,7 +73,7 @@ const createProduct = async ({name, description, price, imageUrl, inStock, categ
 	console.log('starting to create product');
 	try{
 		const product = await client.query(`
-			INSERT INTO products (name, description, price, "imageUrl", "inStock", category)
+			INSERT INTO products (name, description, price, "imageURL", "inStock", category)
 			VALUES($1, $2, $3, $4, $5, $6)
 			RETURNING *;
 		`, [name, description, price, imageUrl, inStock, category]);
@@ -99,7 +99,7 @@ const createInitialProducts = async () => {
 			{ name: 'rare product', description: "IT'S RARE!", price: 20000000, imageUrl: 'placeholder', inStock: true, category:  'rare stuff' }
 		];
 		
-		const products = await Promise.all(productsToCreate.map(product => createProduct(product)));
+		const products = await Promise.all(productsToCreate.map(createProduct));
 		console.log('PRODUCTS CREATED:', products);
 		console.log('FINISHED CREATING PRODUCTS');
 	}

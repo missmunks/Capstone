@@ -24,7 +24,7 @@ async function setTables() {
 async function populateInitialData() {
   try {
     // create useful starting data
-    createInitialProducts();
+    await createInitialProducts();
   } catch (error) {
     throw error;
   }

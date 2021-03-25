@@ -3,13 +3,14 @@ const {
   client,
   dropTables,
   buildTables,
-  // other db methods 
+  // other db methods
+  createInitialProducts,
 } = require('./index');
+
 
 async function setTables() {
   try {
     client.connect();
-
 		console.log('STARTING TO DROP TABLES')
 		await dropTables();
 		console.log('STARTING TO BUILD TABLES');
@@ -23,12 +24,14 @@ async function setTables() {
 async function populateInitialData() {
   try {
     // create useful starting data
+    await createInitialProducts();
   } catch (error) {
     throw error;
   }
-}
+};
+
 
 setTables()
-  //.then(populateInitialData)
+  .then(populateInitialData)
   .catch(console.error)
   .finally(() => client.end());

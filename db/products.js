@@ -37,6 +37,22 @@ const createInitialProducts = async () => {
 	}
 };
 
+const getAllProducts = async () => {
+    try {
+        const {rows: products} = await client.query(`
+            SELECT *
+            FROM products
+        `);
+        return products;
+    } catch (error) {
+        throw error;
+    }
+};
+
+
+
 module.exports = {
+	createProduct,
 	createInitialProducts,
+	getAllProducts,
 }

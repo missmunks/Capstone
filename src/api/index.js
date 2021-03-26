@@ -9,4 +9,12 @@ export async function getSomething() {
   }
 }
 
-
+export async function getAllProducts() {
+	try{
+		const { data: products } = await axios.get('/api/products');
+		return products;
+	}
+	catch(error) {
+		throw error;
+	}
+}

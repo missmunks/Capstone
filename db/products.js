@@ -49,10 +49,24 @@ const getAllProducts = async () => {
     }
 };
 
+const getProductById = async ({id}) => {
+    console.log('getting product by id', id);
+    try{
+        const {rows: [products]} = await client.query(`
+        SELECT *
+        FROM products
+        WHERE id=${id};`);
+        return products;
+    }catch(err){
+        throw err;
+    }
+};
+
 
 
 module.exports = {
 	createProduct,
 	createInitialProducts,
 	getAllProducts,
+	getProductById,
 }

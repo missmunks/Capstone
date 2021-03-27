@@ -18,3 +18,12 @@ export async function getAllProducts() {
 		throw error;
 	}
 }
+
+export async function getProductById(id) {
+	try{
+		const {data} = await axios.get(`/api/products/${id}`)
+		return data;
+	}catch(error) {
+		throw error;
+	}
+}

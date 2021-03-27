@@ -14,11 +14,9 @@ Product,
 const App = () => {
   const [message, setMessage] = useState('');
   const [products, setProducts] = useState([]);
-  console.log('PRODUCTS FROM STATE', products);
 
 	const fetchAndSetProducts = async () => {
 		try{
-			console.log('GOING TO FETCH AND SET PRODUCTS');
 		  const queriedProducts = await getAllProducts();
 		  setProducts(queriedProducts);
     }
@@ -47,11 +45,9 @@ const App = () => {
       <Route exact path='/products'>
       	<Products products={products} setProducts={setProducts}/>
       </Route>
-			{products.map(product => {
-				return <Route exact path ={`/products/${product.id}`}>
-					<Product product={product}/>
-				</Route>
-			})}
+			<Route exact path={`/products/:id`}>
+				<Product products={products} />
+			</Route>
     </div>
   </Router>
   );

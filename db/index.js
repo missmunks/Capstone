@@ -28,7 +28,7 @@ async function buildTables() {
 		    name VARCHAR(255) NOT NULL,
 		    description VARCHAR(255) NOT NULL,
 		    price INTEGER NOT NULL,
-		    "imageURL" VARCHAR(255),
+		    "imageURL" VARCHAR(255) DEFAULT './placeholder.jpg',
 		    "inStock" BOOLEAN DEFAULT false,
 		    category VARCHAR(255) NOT NULL
 		  );

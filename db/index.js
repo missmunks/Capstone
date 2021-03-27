@@ -68,14 +68,26 @@ async function buildTables() {
 	}
 };
 
-const createProduct = async ({name, description, price, imageUrl, inStock, category}) => {
+const createProduct = async ({name, 
+	description, 
+	price, 
+	imageUrl, 
+	inStock, 
+	category
+}) => {
 	try{
 		
 		const {rows: [product]} = await client.query(`
 			INSERT INTO products (name, description, price, "imageURL", "inStock", category)
 			VALUES($1, $2, $3, $4, $5, $6)
 			RETURNING *;
-		`, [name, description, price, imageUrl, inStock, category]);
+		`, [name, 
+			description, 
+			price, 
+			imageUrl, 
+			inStock, 
+			category
+		]);
 		return product;
 	}
 	catch(err){
@@ -89,10 +101,30 @@ const createInitialProducts = async () => {
 	try{
 		
 		const productsToCreate = [
-			{ name: 'very good product', description: "IT'S GREAT!", price: 2000, imageUrl: 'placeholder', inStock: false, category:  'good stuff'},
-			{ name: 'fancy product', description: "IT'S FANCY!", price: 200000, imageUrl: 'placeholder', inStock: true, category:  'fancy stuff' },
-			{ name: 'an everyday product', description: "IT'S STANDARD!", price: 200, imageUrl: 'placeholder', inStock: true, category:  'standard stuff' },
-			{ name: 'rare product', description: "IT'S RARE!", price: 20000000, imageUrl: 'placeholder', inStock: true, category:  'rare stuff' }
+			{ 	name: 'very good product', 
+				description: "IT'S GREAT!", 
+				price: 2000, 
+				imageUrl: 'placeholder', 
+				inStock: false, 
+				category:  'good stuff'},
+			{ 	name: 'fancy product', 
+				description: "IT'S FANCY!", 
+				price: 200000, 
+				imageUrl: 'placeholder', 
+				inStock: true, 
+				category:  'fancy stuff' },
+			{ 	name: 'an everyday product', 
+				description: "IT'S STANDARD!", 
+				price: 200, 
+				imageUrl: 'placeholder', 
+				inStock: true, 
+				category:  'standard stuff' },
+			{ 	name: 'rare product', 
+				description: "IT'S RARE!", 
+				price: 20000000, 
+				imageUrl: 'placeholder', 
+				inStock: true, 
+				category:  'rare stuff' }
 		];
 		
 		const products = await Promise.all(productsToCreate.map(createProduct));

@@ -1,8 +1,6 @@
 const {client} = require('./index');
-	console.log('CLIENT', client);
 
 const createProduct = async ({name, description, price, imageUrl, inStock, category}) => {
-	console.log('starting to create products');
 	try{
 	const {rows: [product]} = await client.query(`
 		INSERT INTO products (name, description, price, "imageURL", "inStock", category)
@@ -19,7 +17,6 @@ const createProduct = async ({name, description, price, imageUrl, inStock, categ
 
 const createInitialProducts = async () => {
 	try{
-		console.log('starting to create initial products');
 		
 		const productsToCreate = [
 			{ name: 'very good product', description: "IT'S GREAT!", price: 2000, imageUrl: 'placeholder', inStock: false, category:  'good stuff'},
@@ -29,8 +26,6 @@ const createInitialProducts = async () => {
 		];
 		
 		const products = await Promise.all(productsToCreate.map(product => createProduct(product)));
-		console.log('PRODUCTS CREATED:', products);
-		console.log('FINISHED CREATING PRODUCTS');
 	}
 	catch(err){
 		throw err;
@@ -50,7 +45,6 @@ const getAllProducts = async () => {
 };
 
 const getProductById = async ({id}) => {
-    console.log('getting product by id', id);
     try{
         const {rows: [products]} = await client.query(`
         SELECT *

@@ -3,10 +3,10 @@ const { Client } = require('pg');
 const DB_NAME = 'grace-shopper-db'
 const DB_URL = process.env.DATABASE_URL || `postgres://localhost:5432/${ DB_NAME }`;
 const client = new Client(DB_URL);
+// const placeholderImg = require('./placeholder');
 
 // database methods
 async function dropTables() {
-  console.log('dropping all tables');
   try{
   await client.query(`
     DROP TABLE IF EXISTS order_products;
@@ -21,7 +21,6 @@ async function dropTables() {
 };
 
 async function buildTables() {
-  console.log('building all tables');
   try{
 		await client.query(`
 		  CREATE TABLE products(
@@ -37,11 +36,11 @@ async function buildTables() {
 		await client.query(`
 		    CREATE TABLE users(
 		      id SERIAL PRIMARY KEY,
-		      firstName VARCHAR(255) NOT NULL,
-		      lastName VARCHAR(255) NOT NULL,
+		      "firstName" VARCHAR(255) NOT NULL,
+		      "lastName" VARCHAR(255) NOT NULL,
 		      email VARCHAR(255) UNIQUE NOT NULL,
 		      "imageURL" VARCHAR(255) NOT NULL,
-		      username VARCHAR(255) NOT NULL,
+		      username VARCHAR(255) UNIQUE NOT NULL,
 		      password VARCHAR(255) UNIQUE NOT NULL,
 		      "isAdmin" BOOLEAN DEFAULT false
 		    )
@@ -70,18 +69,16 @@ async function buildTables() {
 };
 
 const createProduct = async ({name, description, price, imageUrl, inStock, category}) => {
-	console.log('starting to create product');
 	try{
+		
 		const {rows: [product]} = await client.query(`
 			INSERT INTO products (name, description, price, "imageURL", "inStock", category)
 			VALUES($1, $2, $3, $4, $5, $6)
 			RETURNING *;
 		`, [name, description, price, imageUrl, inStock, category]);
-		console.log('the product', product)
 		return product;
 	}
 	catch(err){
-		console.log('producterr:', err);
 		throw err;
 	}
 };
@@ -90,7 +87,6 @@ const createProduct = async ({name, description, price, imageUrl, inStock, categ
 
 const createInitialProducts = async () => {
 	try{
-		console.log('starting to create initial products');
 		
 		const productsToCreate = [
 			{ name: 'very good product', description: "IT'S GREAT!", price: 2000, imageUrl: 'placeholder', inStock: false, category:  'good stuff'},
@@ -100,8 +96,6 @@ const createInitialProducts = async () => {
 		];
 		
 		const products = await Promise.all(productsToCreate.map(createProduct));
-		console.log('PRODUCTS CREATED:', products);
-		console.log('FINISHED CREATING PRODUCTS');
 	}
 	catch(err){
 		throw err;

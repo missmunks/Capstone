@@ -50,7 +50,7 @@ const getUserById = async (id) => {
 const getAllUsers = async () => {
     try {
         const { rows: users } = await client.query(`
-        SELECT *
+        SELECT id, username, "firstName", "lastName", email, "imageURL", "isAdmin"
         FROM users
         `)
         return users

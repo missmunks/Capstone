@@ -15,14 +15,7 @@ const {
 	createUser,
 } = require('../db/index');
 
-usersRouter.get('/', async(req, res, next) => {
-    try {
-        const allUsers = await getAllUsers()
-        res.send(allUsers)
-    } catch (error) {
-        next(error)
-    }
-});
+
 
 usersRouter.post('/register', async (req, res, next) => {
     const {username, password} = req.body;
@@ -79,9 +72,6 @@ usersRouter.post('/login', async(req, res, next) => {
 });
 
 
-/*usersRouter.get('/me', requireUser , (req, res, next) => {
-    console.log(user, 'ME USER')
-    res.send(req.user)  
-});*/
+
 
 module.exports = usersRouter;

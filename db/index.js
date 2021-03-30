@@ -4,7 +4,7 @@ const DB_NAME = 'grace-shopper-db'
 const DB_URL = process.env.DATABASE_URL || `postgres://localhost:5432/${ DB_NAME }`;
 const client = new Client(DB_URL);
 const bcrypt = require('bcrypt');
-// const placeholderImg = require('./placeholder');
+const SALT_COUNT = 10;
 
 // database methods
 async function dropTables() {
@@ -145,7 +145,6 @@ const createUser = async ({
 }) => {
 	console.log('starting to create a user');
 	try{
-		const SALT_COUNT = 10;
 		const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
 		const { rows: [user] } = await client.query(`
 			INSERT INTO users("firstName", "lastName", email, username, password, "imageURL")

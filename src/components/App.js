@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import logo from '../LOGO.png';
 
 import {
   getSomething,
@@ -7,18 +8,18 @@ import {
 } from '../api';
 
 import{
-Products,
-Product,
+  Header,
+  Nav,
+  Products,
+  Product
 } from './';
 
 const App = () => {
   const [message, setMessage] = useState('');
   const [products, setProducts] = useState([]);
-  console.log('PRODUCTS FROM STATE', products);
 
 	const fetchAndSetProducts = async () => {
 		try{
-			console.log('GOING TO FETCH AND SET PRODUCTS');
 		  const queriedProducts = await getAllProducts();
 		  setProducts(queriedProducts);
     }
@@ -41,18 +42,23 @@ const App = () => {
 
   return (
   <Router>
-    <div className="App">
+
+    <Header>
+      <img className="logo" src={logo}/>
+      <Nav />
+    </Header>
+
+    <div className="bulk">
       <h1>Hello, World!</h1>
       <h2>{ message }</h2>
       <Route exact path='/products'>
       	<Products products={products} setProducts={setProducts}/>
       </Route>
-			{products.map(product => {
-				return <Route exact path ={`/products/${product.id}`}>
-					<Product product={product}/>
-				</Route>
-			})}
+			<Route exact path={`/products/:id`}>
+				<Product products={products} />
+			</Route>
     </div>
+
   </Router>
   );
 }

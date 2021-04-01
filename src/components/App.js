@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import logo from '../LOGO.png';
 
 import {
   getSomething,
@@ -7,8 +8,10 @@ import {
 } from '../api';
 
 import{
-Products,
-Product,
+  Header,
+  Nav,
+  Products,
+  Product
 } from './';
 
 const App = () => {
@@ -39,7 +42,13 @@ const App = () => {
 
   return (
   <Router>
-    <div className="App">
+
+    <Header>
+      <img className="logo" src={logo}/>
+      <Nav />
+    </Header>
+
+    <div className="bulk">
       <h1>Hello, World!</h1>
       <h2>{ message }</h2>
       <Route exact path='/products'>
@@ -49,6 +58,7 @@ const App = () => {
 				<Product products={products} />
 			</Route>
     </div>
+
   </Router>
   );
 }

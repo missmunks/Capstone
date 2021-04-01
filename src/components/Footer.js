@@ -2,13 +2,12 @@ import React from 'react';
 
 const style = {
     // backgroundColor: "#000000",
-    // borderTop: "1px solid #E7E7E7",
     textAlign: "center",
-    padding: "10px",
-    // position: "fixed",
+    padding: "20px",
+    // position: "",
     left: "0",
-    top: "0",
-    height: "15em",
+    bottom: "0",
+    height: "10em",
     width: "100%",
 };
 
@@ -19,7 +18,7 @@ const phantom = {
     width: '100%',
   }
 
-function Header({ children }) {
+function Footer({ children }) {
     return (
         <div>
             <div style={phantom} />
@@ -30,4 +29,4 @@ function Header({ children }) {
     )
 }
 
-export default Header;
+export default Footer;

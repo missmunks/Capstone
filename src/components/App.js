@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
-import logo from '../logo.png';
+import logo from '../LOGO.png';
 import socials from '../socials.png';
 
 import {

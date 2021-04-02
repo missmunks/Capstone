@@ -26,7 +26,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 8%;
+  margin-top: 7%;
   /* margin-bottom: 3%; */
   /* width: 100%; */
 }
@@ -71,7 +71,7 @@ input[type=password] {
 
 /*FOOTER*/
 
-/* .copyright {
+.copyright {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -82,4 +82,4 @@ input[type=password] {
 
 .socials{
   height: 8em;
-} */
+}

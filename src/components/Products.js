@@ -8,7 +8,9 @@ const Products = ({ products }) => {
 		<h1>PRODUCTS!</h1>
 		<div className='products-list'>
 		{products.map(product => {
-			return <Product product={product} products={products} />
+			return <div key={product.id}>
+				<Product product={product} products={products} />
+			</div>
 		})}
 		</div>
 	</>

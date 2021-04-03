@@ -8,6 +8,8 @@ import twitter from '../twitter.png';
 import insta from '../insta.png';
 import youtube from '../youtube.png';
 
+
+
 import {
   getSomething,
   getAllProducts
@@ -18,13 +20,31 @@ import{
   Nav,
   Products,
   Product,
-  Footer
+  Footer,
+  Register,
+	Login,
 } from './';
 
 const App = () => {
   const [message, setMessage] = useState('');
   const [products, setProducts] = useState([]);
-
+	const [token, setToken] = useState( () => {
+		if (localStorage.getItem('token')) {
+			return localStorage.getItem('token')
+		} else {
+			return ''
+		}
+	});
+	const [user, setUser] = useState( () => {
+		if (localStorage.getItem('user')) {
+			return localStorage.getItem('user');
+		}
+		else{
+			return {};
+		}
+	});
+	
+	
 	const fetchAndSetProducts = async () => {
 		try{
 		  const queriedProducts = await getAllProducts();
@@ -63,6 +83,13 @@ const App = () => {
       </Route>
 			<Route exact path={`/products/:id`}>
 				<Product products={products} />
+			</Route>
+			<Route exact path='/register'>
+				<Register />
+			</Route>
+
+			<Route exact path='/login'>
+				<Login setToken={setToken} setUser={setUser}/>
 			</Route>
     </div>
 

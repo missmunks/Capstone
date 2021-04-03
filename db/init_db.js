@@ -5,6 +5,7 @@ const {
   buildTables,
   // other db methods
   createInitialProducts,
+  createInitialUsers,
 } = require('./index');
 
 
@@ -25,6 +26,7 @@ async function populateInitialData() {
   try {
     // create useful starting data
     await createInitialProducts();
+    await createInitialUsers();
   } catch (error) {
     throw error;
   }

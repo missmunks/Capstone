@@ -1,14 +1,13 @@
 import React from 'react';
+import logo from '../LOGO.png';
+import { Nav } from './';
 
 const style = {
-    // backgroundColor: "#000000",
-    // borderTop: "1px solid #E7E7E7",
+    borderBottom: "1px solid #E7E7E7",
     textAlign: "center",
-    padding: "10px",
-    // position: "fixed",
     left: "0",
     top: "0",
-    height: "15em",
+    height: "8em",
     width: "100%",
 };
 
@@ -19,15 +18,13 @@ const phantom = {
     width: '100%',
   }
 
-function Header({ children }) {
-    return (
-        <div>
-            <div style={phantom} />
-            <div style={style}>
+function Header({ children, token, setToken, user, setUser }) {
+    return <>
+            <img className="logo" src={logo}/>
+            <Nav token={token} setToken={setToken} user={user} setUser={setUser} style={phantom} style={style}>
                 { children }
-            </div>
-        </div>
-    )
+            </Nav>
+    </>
 }
 
 export default Header;

@@ -1,10 +1,13 @@
 import React from 'react';
 
+import fb from '../fb.png';
+import twitter from '../twitter.png';
+import insta from '../insta.png';
+import youtube from '../youtube.png';
+
 const style = {
-    // backgroundColor: "#000000",
     textAlign: "center",
     padding: "20px",
-    // position: "",
     left: "0",
     bottom: "0",
     height: "10em",
@@ -19,14 +22,16 @@ const phantom = {
   }
 
 function Footer({ children }) {
-    return (
-        <div>
-            <div style={phantom} />
-            <div style={style}>
+    return <>
+            <div style={phantom} style={style}>
                 { children }
+                <p className="copyright">© 1796-3005, WE HAVE THINGS, Inc. or its affiliates</p>
+			    <a href='https://www.facebook.com/marketplace/?ref=app_tab'><img className="socials" src={fb}/></a>
+                <a href='https://twitter.com/?lang=en'><img className="socials" src={twitter}/></a>
+                <a href='https://www.instagram.com/explore/tags/things/'><img className="socials" src={insta}/></a>
+                <a href='https://youtu.be/9C_HReR_McQ'><img className="socials" src={youtube}/></a>
             </div>
-        </div>
-    )
+    </>
 }
 
 export default Footer;

@@ -67,9 +67,7 @@ const App = () => {
 		fetchAndSetProducts();
   }, []);
 
-  return (
-  <Router>
-
+  return <>
     <Header>
       <img className="logo" src={logo}/>
       <Nav />
@@ -100,9 +98,7 @@ const App = () => {
       <a href='https://www.instagram.com/explore/tags/things/'><img className="socials" src={insta}/></a>
       <a href='https://youtu.be/9C_HReR_McQ'><img className="socials" src={youtube}/></a>
 		</Footer>
-
-  </Router>
-  );
+  </>
 }
 
 export default App;

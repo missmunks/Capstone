@@ -5,20 +5,22 @@ body {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
-  /*HEADER*/
+/*HEADER*/
 .logo {
   display: flex;
   align-items: flex-start;
   height: 20em;
 }
 
+nav.navLinks {
+  display: flex;
+  justify-content: center;
+}
+
 a {
-  margin-bottom: 1em;
-  padding-bottom: 1em;
-  margin: 3em;
   padding: 1em;
-    color: rgb(153, 87, 56);
-    font-size: 15px;
+  color: rgb(153, 87, 56);
+  font-size: 15px;
 }
 
 /* MAIN BODY */
@@ -26,9 +28,8 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 7%;
   color: #5B3D29;
-  /* width: 100%; */
+  width: 100%;
 }
 
 h2 {
@@ -70,7 +71,6 @@ input[type=password] {
 
 
 /*FOOTER*/
-
 .copyright {
   display: flex;
   flex-direction: column;

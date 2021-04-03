@@ -27,7 +27,7 @@ a {
   flex-direction: column;
   align-items: center;
   margin-top: 7%;
-  /* margin-bottom: 3%; */
+  color: #5B3D29;
   /* width: 100%; */
 }
 
@@ -81,5 +81,5 @@ input[type=password] {
 }
 
 .socials{
-  height: 8em;
+  height: 3em;
 }

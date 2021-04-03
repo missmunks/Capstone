@@ -22,13 +22,17 @@ const getUser = async ({username, password}) => {
         	FROM users
         	WHERE username=$1;
         `, [username]);
-
-        const hashedPassword = user.password;
-        const passwordsMatch = await bcrypt.compare(password, hashedPassword);
-        if (passwordsMatch){
-            const returnObj = { username: user.username, id: user.id };
-            return returnObj;
-        } 
+				if(user){
+		      const hashedPassword = user.password;
+		      const passwordsMatch = await bcrypt.compare(password, hashedPassword);
+		      if (passwordsMatch){
+		          const returnObj = { username: user.username, id: user.id };
+		          return returnObj;
+		      } 
+      	}
+      	else{
+      		throw 'no user with those credentials';
+      	}
     } catch (error) {
         throw error
     }  

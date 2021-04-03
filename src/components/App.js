@@ -70,7 +70,7 @@ const App = () => {
   return <>
     <Header>
       <img className="logo" src={logo}/>
-      <Nav />
+      <Nav token={token} setToken={setToken} user={user} setUser={setUser}/>
     </Header>
 
     <div className="bulk">

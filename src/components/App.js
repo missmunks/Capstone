@@ -68,8 +68,8 @@ const App = () => {
 
     <Footer>
 			<p className="copyright">Copyright © 1997 - 2021 GET BUFF Franchising, LLC.</p>
-			<a href='https://www.instagram.com/explore/tags/getbuff/'><img className="socials" src={fb}/></a>
-      <a href='https://www.instagram.com/explore/tags/getbuff/'><img className="socials" src={twitter}/></a>
+			<a href='https://www.facebook.com/marketplace/?ref=app_tab'><img className="socials" src={fb}/></a>
+      <a href='https://twitter.com/?lang=en'><img className="socials" src={twitter}/></a>
       <a href='https://www.instagram.com/explore/tags/things/'><img className="socials" src={insta}/></a>
       <a href='https://youtu.be/9C_HReR_McQ'><img className="socials" src={youtube}/></a>
 		</Footer>

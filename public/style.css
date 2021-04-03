@@ -1,9 +1,9 @@
-/* body {
-    background-color: #9c5322;
+body {
+    background-color: solid white;
     font-size: 14px;
     margin-bottom: .4px;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  } */
+  }
 
   /*HEADER*/
 .logo {
@@ -51,16 +51,16 @@ h2 {
 button[type=submit] {
     height: 40px;
     width: 80px;
-    border: 2px solid #FFBD4A;
+    border: 2px solid #5B3D29;
     margin-top: 15px;
 }
 input[type=text] {
-  border: 2px solid #FFBD4A;
+  border: 2px solid #5B3D29;
   width: 200px;
   height: 50px;
 }
 input[type=password] {
-  border: 2px solid #FFBD4A;
+  border: 2px solid #5B3D29;
   width: 200px;
   height: 50px;
 }
@@ -76,7 +76,7 @@ input[type=password] {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  color: white;
+  color: #5B3D29;
   font-size: 14px;
 }
 

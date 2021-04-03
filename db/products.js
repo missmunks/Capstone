@@ -28,29 +28,30 @@ const createInitialProducts = async () => {
 	try{
 		
 		const productsToCreate = [
-			{ 	name: 'very good product',
-				description: "IT'S GREAT!",
+			{ 	name: 'very good thing',
+				description: "IT'S A GREAT THING!",
 				price: 2000,
 				imageUrl: 'placeholder',
 				inStock: false,
-				category:  'good stuff'},
-			{ 	name: 'fancy product',
+				category:  'good thing'},
+			{ 	name: 'fancy thing',
 				description: "IT'S FANCY!",
 				price: 200000,
 				imageUrl: 'placeholder',
 				inStock: true,
-				category:  'fancy stuff' },
-			{ name: 'an everyday product', description: "IT'S STANDARD!",
+				category:  'fancy things' },
+			{ 	name: 'an everyday thing', 
+				description: "IT'S REALLY A STANDARD THING!",
 				price: 200,
 				imageUrl: 'placeholder',
 				inStock: true,
-				category:  'standard stuff' },
-			{ 	name: 'rare product',
+				category:  'standard things' },
+			{ 	name: 'rare thing',
 				description: "IT'S RARE!",
 				price: 20000000,
 				imageUrl: 'placeholder',
 				inStock: true,
-				category:  'rare stuff' }
+				category:  'rare things' }
 		];
 		
 		const products = await Promise.all(productsToCreate.map(product => createProduct(product)));

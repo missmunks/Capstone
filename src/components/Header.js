@@ -1,11 +1,13 @@
 import React from 'react';
+import {
+    Nav
+  } from './';
 
 const style = {
-    // backgroundColor: "#000000",
-    // borderTop: "1px solid #E7E7E7",
+    borderBottom: "1px solid #E7E7E7",
     textAlign: "center",
     padding: "10px",
-    // position: "fixed",
+    position: "fixed",
     left: "0",
     top: "0",
     height: "15em",

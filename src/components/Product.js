@@ -15,22 +15,29 @@ const Product = ({products, product}) => {
 		}
 	}
 
-	useEffect(async () => {
-		const aProduct =await getProduct(id)
-		if(aProduct){
-	   setSingleProduct(aProduct)
+	useEffect( () => {
+		const getAndSetProduct = async () => {
+			const aProduct = await getProduct(id)
+			if(aProduct){
+			 setSingleProduct(aProduct)
+			}
+		}
+		if(id){
+			getAndSetProduct();
 		}
 	}, [id])
 
 	if(product){
-		return <div key={product.id}>
-		<h3 className='products-list-name'>{product.name}</h3>
-		<ul>
-			<li>description: {product.description}</li>
-			<li>in stock? {product.inStock ? 'yes' : 'no' }</li>
-			<li>price: ${product.price}</li>
-		</ul>
-	</div>
+		return <>
+			<h3 className='products-list-name'>
+				<Link to={`/products/${product.id}`}> {product.name} </Link>
+			</h3>
+			<ul>
+				<li>description: {product.description}</li>
+				<li>in stock? {product.inStock ? 'yes' : 'no' }</li>
+				<li>price: ${product.price}</li>
+			</ul>
+		</>
 	}else{
 
 

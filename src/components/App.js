@@ -16,6 +16,7 @@ import{
   Footer,
   Register,
 	Login,
+	MyAccount,
 } from './';
 
 const App = () => {
@@ -30,12 +31,15 @@ const App = () => {
 	});
 	const [user, setUser] = useState( () => {
 		if (localStorage.getItem('user')) {
-			return localStorage.getItem('user');
+			const user = localStorage.getItem('user');
+			const userObj = JSON.parse(user);
+			return userObj;
 		}
 		else{
 			return {};
 		}
 	});
+	console.log('THE CURRENT USER', user);
 	
 	
 	const fetchAndSetProducts = async () => {
@@ -77,12 +81,16 @@ const App = () => {
 			</Route>
 
 			<Route exact path='/register'>
-				<Register />
+				<Register setToken={setToken} setUser={setUser}/>
 			</Route>
 
 			<Route exact path='/login'>
 				<Login setToken={setToken} setUser={setUser}/>
 			</Route>
+			<Route exact path ='/myaccount'>
+				<MyAccount token={token} user={user}/>
+			</Route>
+			
     </div>
 
     <Footer/>

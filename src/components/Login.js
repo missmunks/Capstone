@@ -10,15 +10,15 @@ const Login = ({setUser, setToken}) => {
 
 	const handleSubmit = async (ev) => {
 		ev.preventDefault();
-
 		try{
 			const userData = await login({username, password});
-			console.log('LOGIN DATA:', userData);
 			localStorage.setItem('token', userData.token);
-			localStorage.setItem('user', userData.user);
+			localStorage.setItem('user', JSON.stringify(userData.user));
 			setToken(userData.token);
 			setUser(userData.user);
-
+			setUsername('');
+			setPassword('');
+			history.push('/');
 		}
 		catch(error){
 			throw error;
@@ -33,8 +33,9 @@ const Login = ({setUser, setToken}) => {
 					<br />
 					<input type='password' value={password} onChange={(ev) => setPassword(ev.target.value)} placeholder="password"></input>
 					<br />
-					<button type="submit">SUBMIT</button>
+					<button type="submit">Login</button>
 				</form>
+				<Link to='/register'>need an account? register here!</Link>
 			</div>
 	</>
 };

@@ -31,9 +31,30 @@ export async function getProductById(id) {
 export async function login({username, password}) {
 
 	try{
-		const {data} = await axios.post(`/api/users/login`, {
-			username: "johnbonjovi",
-    	password: "passwordo"
+		const {data} = await axios.post(`/api/users/login`, {username, password});
+		return data;
+	}
+	catch(error){
+		throw error;
+	}
+}
+
+export async function register({
+	firstName,
+  lastName,
+  email,
+  username,
+  password,
+  imageURL
+}) {
+	try{
+		const {data} = await axios.post('/api/users/register', {
+			firstName,
+			lastName,
+			email,
+			username,
+			password,
+			imageURL
 		});
 		return data;
 	}
@@ -41,3 +62,17 @@ export async function login({username, password}) {
 		throw error;
 	}
 }
+
+export async function getMe(token) {
+	try{
+		const {data} = await axios.get('/api/users/me', {
+			headers: {
+				Authorization : `Bearer ${token}`
+			}
+		});
+		return data;
+	}
+	catch(error){
+		throw error;
+	}
+};

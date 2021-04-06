@@ -51,7 +51,7 @@ async function buildTables() {
 				id SERIAL PRIMARY KEY,
 				status VARCHAR(255) DEFAULT 'created',
 				"userId" INTEGER REFERENCES users(id),
-				"datePlaced" DATE NOT NULL
+				"datePlaced" DATE NOT NULL DEFAULT CURRENT_DATE
 			)
 	`);
 	await client.query(`
@@ -205,6 +205,80 @@ const createInitialUsers = async () => {
 	}
 }
 
+const createOrder = async ({userId, status}) => {
+	console.log('creating order...');
+	try{
+		const {rows: [order]} = await client.query(`
+		INSERT INTO orders("userId", status)
+		VALUES ($1, $2)
+		RETURNING *;
+		`, [userId, status]);
+		console.log('order: ', order);
+		return order;
+	}catch(error){
+		throw error;
+	}
+};
+
+const createInitialOrders = async () => {
+	console.log('creating initial orders...');
+	try{
+		const ordersToCreate = [
+			{
+				status: 'created',
+				userId: 2
+			},
+			{
+				status: 'placed',
+				userId: 3
+			},
+			{
+				status: 'submitted',
+				userId: 1
+			}
+		];
+		
+		const orders = await Promise.all(ordersToCreate.map(createOrder));
+		console.log('test orders: ', orders);
+	}catch(error){
+		throw error;
+	}
+};
+
+const createOrderProduct = async ({productId, orderId, price, quantity}) => {
+	console.log('creating order_products...');
+	try{
+		const {rows: [order_product]} = await client.query(`
+		INSERT INTO order_products("productId", "orderId", price, quantity)
+		VALUES ($1, $2, $3, $4)
+		RETURNING *;
+		`, [productId, orderId, price, quantity]);
+		console.log('order_product: ', order_product);
+		return order_product;
+	}catch(error){
+		throw error;
+	}
+};
+
+const createInitialOrderProducts = async () => {
+	console.log('creating initial order_products...');
+	try{
+		const orderProductsToCreate = [
+			{
+				productId: 1,
+				orderId: 1,
+				price: 12,
+				quantity: 1
+			}
+		];
+		const order_products = await Promise.all(orderProductsToCreate.map(createOrderProduct));
+		console.log('test order_products: ', order_products);
+	}catch(error){
+		throw error;
+	}
+};
+
+
 
 // export
 module.exports = {
@@ -215,4 +289,8 @@ module.exports = {
   createProduct,
   createUser,
   createInitialUsers,
+  createOrder,
+  createInitialOrders,
+  createOrderProduct,
+  createInitialOrderProducts
 }

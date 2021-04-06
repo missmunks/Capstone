@@ -6,6 +6,8 @@ const {
   // other db methods
   createInitialProducts,
   createInitialUsers,
+  createInitialOrders,
+  createInitialOrderProducts
 } = require('./index');
 
 
@@ -27,6 +29,8 @@ async function populateInitialData() {
     // create useful starting data
     await createInitialProducts();
     await createInitialUsers();
+    await createInitialOrders();
+    await createInitialOrderProducts();
   } catch (error) {
     throw error;
   }

@@ -1,3 +1,5 @@
+const { addProductToOrder, getOrderProductById, updateOrderProduct, destroyOrderProduct } = require('./db/orderProducts');
+
 // This is the Web Server
 const express = require('express');
 const server = express();

@@ -292,5 +292,5 @@ module.exports = {
   createOrder,
   createInitialOrders,
   createOrderProduct,
-  createInitialOrderProducts
+  createInitialOrderProducts,
 }

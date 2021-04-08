@@ -3,12 +3,6 @@ const productsRouter = require('./productsRouter.js');
 const usersRouter = require('./usersRouter.js');
 const ordersRouter = require('./ordersRouter.js');
 
-apiRouter.get("/", (req, res, next) => {
-  res.send({
-    message: "API is under construction!"
-  });
-});
-
 apiRouter.use(async (req, res, next) => {
   const prefix = 'Bearer ';
   const auth = req.header('Authorization');
@@ -31,6 +25,13 @@ apiRouter.use(async (req, res, next) => {
       message: `Authorization token must start with ${ prefix }`
     });
   }
+});
+
+
+apiRouter.get("/", (req, res, next) => {
+  res.send({
+    message: "API is under construction!"
+  });
 });
 
 apiRouter.use("/products", productsRouter);

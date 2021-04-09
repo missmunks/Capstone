@@ -5,7 +5,7 @@ const getOrderProductById = async (id) => {
         const {rows: [order_product]} = await client.query(`
         SELECT *
         FROM order_products
-        WHERE id=${id};`);
+        WHERE "productId"=${id};`);
         return order_product;
     }catch(error){
         throw error;
@@ -43,11 +43,11 @@ const updateOrderProduct = async(fields) => {
 
 const destroyOrderProduct = async(id) => {
     try{
-        const {rows: [order_products]} = await client.query(`
+        const deleted = await client.query(`
         DELETE FROM order_products
         WHERE id=${id};
         `);
-        return order_products;
+        return deleted;
     }catch(error){
         throw error;
     }

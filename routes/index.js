@@ -2,6 +2,7 @@ const apiRouter = require('express').Router();
 const productsRouter = require('./productsRouter.js');
 const usersRouter = require('./usersRouter.js');
 const ordersRouter = require('./ordersRouter.js');
+const orderProductsRouter = require('./orderProductsRouter.js');
 
 apiRouter.use(async (req, res, next) => {
   const prefix = 'Bearer ';
@@ -39,5 +40,7 @@ apiRouter.use("/products", productsRouter);
 apiRouter.use("/users", usersRouter);
 
 apiRouter.use("/orders", ordersRouter);
+
+apiRouter.use("/order_products", orderProductsRouter);
 
 module.exports = apiRouter;

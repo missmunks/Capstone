@@ -15,6 +15,7 @@ const {
 const {
 	createUser,
 } = require('../db/index');
+const { response } = require('express');
 
 
 usersRouter.get('/', async (req, res, next) => {
@@ -22,37 +23,14 @@ usersRouter.get('/', async (req, res, next) => {
 	res.send(users);
 });
 
-usersRouter.get('/me', async (req, res, next) => {
-	console.log('STARTING TO GET ME');
-	const prefix = 'Bearer '
-	const auth = req.headers.authorization;
-	if (!auth) {
-		next({
-			name: 'noAuthorizationError',
-			message: 'i need a token. there is a token machine in the lobby.'
-		});
-	}
-	else if (auth.startsWith(prefix)) {
-		const token = auth.slice(prefix.length);
-
-		try{
-			const { id } = jwt.verify(token, JWT_SECRET);
-			if (id) {
-				const user = await getUserById(id);
-				res.send(user);
-			}
-		}
-		catch(error){
-			console.log('THE ERROR FROM /ME', error);
-			next(error);
-		}
-	}
-	else {
-		next({
-			name: 'AuthorizationHeaderError',
-			message: `Authorization token must start with ${ prefix }`
-		});
-	}
+usersRouter.get('/me', requireUser, async (req, res, next) => {
+  const {user} = req;
+  console.log("checking user", user)
+    try{
+      res.send(user);
+    }catch(err){
+      throw(err);
+    }
 });
 
 

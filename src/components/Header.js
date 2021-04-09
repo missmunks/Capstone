@@ -11,17 +11,10 @@ const style = {
     width: "100%",
 };
 
-const phantom = {
-    display: 'block',
-    padding: '20px',
-    height: '60px',
-    width: '100%',
-  }
-
 function Header({ children, token, setToken, user, setUser }) {
     return <>
             <img className="logo" src={logo}/>
-            <Nav token={token} setToken={setToken} user={user} setUser={setUser} style={phantom} style={style}>
+            <Nav token={token} setToken={setToken} user={user} setUser={setUser} style={style}>
                 { children }
             </Nav>
     </>

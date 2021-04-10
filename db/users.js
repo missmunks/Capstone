@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const getUserByUsername = async (username) => {
   try {
     const { rows: [user] } = await client.query(`
-		  SELECT id, username
+		  SELECT id, username, "isAdmin"
 		  FROM users
 		  WHERE username=$1;
     `, [username]);

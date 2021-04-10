@@ -3,9 +3,9 @@ const { getAllOrders, getOrderById, getOrdersByUser } = require('../db/orders');
 const { addProductToOrder, getOrderProductById, updateOrderProduct, destroyOrderProduct } = require('../db/orderProducts');
 const ordersRouter = express.Router();
 const {createOrder} = require('../db/index')
-const { requireUser } = require('./utils');
+const { requireUser, requireAdmin } = require('./utils');
 
-ordersRouter.get('/', async(req, res, next) => {
+ordersRouter.get('/', requireUser, requireAdmin, async(req, res, next) => {
 	try{
 		const orders = await getAllOrders();
 		res.send(orders);
@@ -15,11 +15,16 @@ ordersRouter.get('/', async(req, res, next) => {
 	}
 });
 
-ordersRouter.get('/:id', async(req, res, next) => {
+ordersRouter.get('/:id', requireUser, async(req, res, next) => {
 	const { id } = req.params;
+	const user = req.user;
 	try{
 		const order = await getOrderById(id);
-		res.send(order);
+		console.log('the order', order);
+		if(order.userId === user.id || user.isAdmin){
+			res.send(order);
+		}
+		res.send({message: 'this is not your order, silly'});
 	}
 	catch(error){
 		next(error);

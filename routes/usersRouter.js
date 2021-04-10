@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const {JWT_SECRET = "don't tell a soul"} = process.env
 const express = require('express');
 const usersRouter = express.Router();
-const { requireUser } = require('./utils');
+const { requireUser, requireAdmin } = require('./utils');
 
 const {
   getUserByUsername,
@@ -18,7 +18,7 @@ const {
 const { response } = require('express');
 
 
-usersRouter.get('/', async (req, res, next) => {
+usersRouter.get('/', requireUser, requireAdmin, async (req, res, next) => {
 	const users = await getAllUsers();
 	res.send(users);
 });

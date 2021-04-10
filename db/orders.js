@@ -33,12 +33,10 @@ const getAndAppendProducts = async (order) => {
 
 const getAllOrders = async() => {
     try {
-    		console.log('GETTING ALL ORDERS');
         const {rows: orders } = await client.query(`
             SELECT *
             FROM orders
         `);
-        console.log('MAPPING ORDERS');
        	return Promise.all(orders.map(order => getAndAppendProducts(order)));
     }catch(error) {
         throw error;
@@ -88,7 +86,16 @@ const getOrdersByProduct = async ({ id }) => {
 	}
 };
 
-getOrdersByProduct({id: 1}).then(console.log)
+const getCartByUser = async ({id}) => {
+	try{
+	const orders = await getOrdersByUser({id});
+	const cart = orders.filter(order => order.status === 'created')
+	return cart;
+	}catch(error){
+		throw error;
+	}
+
+};
 
 
 
@@ -98,4 +105,5 @@ module.exports = {
 	getOrderById,
 	getOrdersByUser,
 	getOrdersByProduct,
+	getCartByUser,
 }

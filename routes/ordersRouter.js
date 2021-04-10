@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllOrders, getOrderById, getOrdersByUser } = require('../db/orders');
+const { getAllOrders, getOrderById, getOrdersByUser, getCartByUser } = require('../db/orders');
 const { addProductToOrder, getOrderProductById, updateOrderProduct, destroyOrderProduct } = require('../db/orderProducts');
 const ordersRouter = express.Router();
 const {createOrder} = require('../db/index')
@@ -15,12 +15,21 @@ ordersRouter.get('/', requireUser, requireAdmin, async(req, res, next) => {
 	}
 });
 
+ordersRouter.get('/cart', requireUser, async (req, res, next) => {
+	const user = req.user;
+	try{
+		const cart = await getCartByUser({id: user.id})
+		res.send(cart)
+	}catch(error){
+		next(error)
+	}
+});
+
 ordersRouter.get('/:id', requireUser, async(req, res, next) => {
 	const { id } = req.params;
 	const user = req.user;
 	try{
 		const order = await getOrderById(id);
-		console.log('the order', order);
 		if(order.userId === user.id || user.isAdmin){
 			res.send(order);
 		}
@@ -52,11 +61,9 @@ ordersRouter.post('/', requireUser, async(req, res, next) => {
 ordersRouter.post('/:orderId/products', async(req, res, next) => {
 	const { orderId } = req.params;
     const {productId, price, quantity} = req.body;
-	console.log('adding order_product');
 	try{
 		const order_product = await getOrderProductById(productId);
 		if(order_product){
-            console.log('order_product retrieved', order_product);
             const updated = await updateOrderProduct({id: order_product.id, quantity: quantity});
 		    res.send({updated, message: 'updated'});
         }else{
@@ -68,5 +75,9 @@ ordersRouter.post('/:orderId/products', async(req, res, next) => {
 		next(error);
 	}
 });
+
+
+
+
 
 module.exports = ordersRouter;

@@ -66,7 +66,7 @@ const getOrdersByUser = async ({id}) => {
 			FROM orders
 			WHERE "userId"=${id};
 		`);
-		return getAndAppendProducts(order);
+		return Promise.all(orders.map(order => getAndAppendProducts(order)));	
 	}
 	catch(error){
 		throw error;
@@ -89,6 +89,7 @@ const getOrdersByProduct = async ({ id }) => {
 };
 
 getOrdersByProduct({id: 1}).then(console.log)
+
 
 
 

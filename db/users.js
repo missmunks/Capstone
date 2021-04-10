@@ -51,6 +51,7 @@ const getUserById = async (id) => {
     }
 };
 
+
 const getAllUsers = async () => {
     try {
         const { rows: users } = await client.query(`

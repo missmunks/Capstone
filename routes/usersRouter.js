@@ -16,6 +16,7 @@ const {
 	createUser,
 } = require('../db/index');
 const { response } = require('express');
+const { getOrdersByUser} = require('../db/orders')
 
 
 usersRouter.get('/', requireUser, requireAdmin, async (req, res, next) => {
@@ -86,6 +87,28 @@ usersRouter.post('/login', async(req, res, next) => {
     } catch (error) {
         next(error)
     }
+});
+
+usersRouter.get('/:userId/orders', requireUser, async(req,res,next) =>{
+  console.log('sandwich')
+  try {
+    const { userId } = req.params;
+    console.log(userId, 'this is the id')
+    const user = await getUserById(userId);
+    console.log("user!!!!!", user)
+    if(!user) {
+      throw new Error ('log in, silly')
+    } else if(user.id == userId) {
+      console.log(user.id, 'this is the userid')
+      const orders = await getOrdersByUser({id: userId});
+      console.log("orders:", orders)
+      res.send(orders);
+    }else{
+      res.send('not your order')
+    }
+  } catch (error) {
+    next(error)
+  }
 });
 
 

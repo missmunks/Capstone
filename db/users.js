@@ -50,7 +50,6 @@ const getUserById = async (id) => {
         throw error;
     }
 };
-getUserById(1).then(console.log)
 
 
 const getAllUsers = async () => {

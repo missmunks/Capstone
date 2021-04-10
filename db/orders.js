@@ -1,7 +1,7 @@
 const {client} = require('./index');
 const { getUserById } = require('./users');
 
-
+// These two functions serve to fetch and append the order products to each order. getAndAppendProducts can be called at the end of any of these database adapters to add a key called "orderProducts" to the order object with a value set to an array of all of the individual orderProducts.
 const getOrderProductsByOrder = async(orderId) => {
 	try{
 		const { rows: orderProducts } = await client.query(`
@@ -26,6 +26,8 @@ const getAndAppendProducts = async (order) => {
 		throw error;
 	}
 };
+
+
 
 
 
@@ -71,10 +73,28 @@ const getOrdersByUser = async ({id}) => {
 	}
 };
 
+const getOrdersByProduct = async ({ id }) => {
+	try{
+		const {rows: [order]} = await client.query(`
+			SELECT orders.id, orders.status, orders."userId", orders."datePlaced"
+			FROM orders
+			JOIN order_products ON order_products."orderId" = orders.id
+			WHERE order_products."productId"=${id}
+		`);
+		return getAndAppendProducts(order);
+	}
+	catch(error){
+		throw error;
+	}
+};
+
+getOrdersByProduct({id: 1}).then(console.log)
+
 
 
 module.exports = {
 	getAllOrders,
 	getOrderById,
 	getOrdersByUser,
+	getOrdersByProduct,
 }

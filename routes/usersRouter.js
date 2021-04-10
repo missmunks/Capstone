@@ -88,6 +88,28 @@ usersRouter.post('/login', async(req, res, next) => {
     }
 });
 
+usersRouter.get('/:userId/orders', requireUser, async(req,res,next) =>{
+  console.log('sandwich')
+  try {
+    const { userId } = req.params;
+    console.log(userId, 'this is the id')
+    const user = await getUserById({userId});
+    console.log("user!!!!!", user)
+    if(!user) {
+      next({
+        name: 'NoUser',
+        message: `Error looking up user ${req.user.username}`
+      });
+    } else if(req.user && user.id === req.user.id) {
+      const orders = await getOrdersByUser({userId});
+      console.log("orders:", orders)
+      res.send(orders);
+    } 
+  } catch (error) {
+    next(error)
+  }
+});
+
 
 
 

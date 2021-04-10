@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 const getUserByUsername = async (username) => {
   try {
     const { rows: [user] } = await client.query(`
-		  SELECT id, username
+		  SELECT id, username, "isAdmin"
 		  FROM users
 		  WHERE username=$1;
     `, [username]);
@@ -50,6 +50,8 @@ const getUserById = async (id) => {
         throw error;
     }
 };
+getUserById(1).then(console.log)
+
 
 const getAllUsers = async () => {
     try {

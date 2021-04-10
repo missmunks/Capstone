@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const {JWT_SECRET = "don't tell a soul"} = process.env
 const express = require('express');
 const usersRouter = express.Router();
-const { requireUser } = require('./utils');
+const { requireUser, requireAdmin } = require('./utils');
 
 const {
   getUserByUsername,
@@ -16,9 +16,10 @@ const {
 	createUser,
 } = require('../db/index');
 const { response } = require('express');
+const { getOrdersByUser} = require('../db/orders')
 
 
-usersRouter.get('/', async (req, res, next) => {
+usersRouter.get('/', requireUser, requireAdmin, async (req, res, next) => {
 	const users = await getAllUsers();
 	res.send(users);
 });
@@ -93,18 +94,18 @@ usersRouter.get('/:userId/orders', requireUser, async(req,res,next) =>{
   try {
     const { userId } = req.params;
     console.log(userId, 'this is the id')
-    const user = await getUserById({userId});
+    const user = await getUserById(userId);
     console.log("user!!!!!", user)
     if(!user) {
-      next({
-        name: 'NoUser',
-        message: `Error looking up user ${req.user.username}`
-      });
-    } else if(req.user && user.id === req.user.id) {
-      const orders = await getOrdersByUser({userId});
+      throw new Error ('log in, silly')
+    } else if(user.id == userId) {
+      console.log(user.id, 'this is the userid')
+      const orders = await getOrdersByUser({id: userId});
       console.log("orders:", orders)
       res.send(orders);
-    } 
+    }else{
+      res.send('not your order')
+    }
   } catch (error) {
     next(error)
   }

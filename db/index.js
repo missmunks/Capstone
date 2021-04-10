@@ -141,16 +141,17 @@ const createUser = async ({
   email,
   username,
   password,
-  imageURL
+  imageURL,
+  isAdmin
 }) => {
 	console.log('starting to create a user');
 	try{
 		const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
 		const { rows: [user] } = await client.query(`
-			INSERT INTO users("firstName", "lastName", email, username, password, "imageURL")
-			VALUES($1, $2, $3, $4, $5, $6)
-			RETURNING id, username;
-		`, [firstName, lastName, email, username, hashedPassword, imageURL]);
+			INSERT INTO users("firstName", "lastName", email, username, password, "imageURL", "isAdmin")
+			VALUES($1, $2, $3, $4, $5, $6, $7)
+			RETURNING id, username, "isAdmin";
+		`, [firstName, lastName, email, username, hashedPassword, imageURL, isAdmin]);
 		return user;
 	}
 	catch(error) {
@@ -169,6 +170,7 @@ const createInitialUsers = async () => {
 				username: 'Henry', 
 				password: 'password', 
 				imageURL: 'https://static01.nyt.com/images/2021/01/12/science/30TB-CUTTLEFISH/merlin_181764690_5e368578-7779-4fda-9e87-ed64ba987d44-articleLarge.jpg?quality=75&auto=webp&disable=upscale',
+				isAdmin: true,
 			},
       {
 				firstName: 'Boaty', 
@@ -177,6 +179,7 @@ const createInitialUsers = async () => {
 				username: 'Skipper', 
 				password: 'dipper', 
 				imageURL: 'https://static01.nyt.com/images/2016/03/22/nytnow/22xp-boaty/22xp-boaty-superJumbo.jpg',
+				isAdmin: false,
       },
       { 
 		    firstName: 'Anita', 
@@ -185,6 +188,7 @@ const createInitialUsers = async () => {
 		    username: 'calgon', 
 		    password: '12345678', 
 		    imageURL: 'https://images-na.ssl-images-amazon.com/images/I/911Wlv75POL._AC_SL1500_.jpg',
+		    isAdmin: false,
       },
       {
       	firstName: 'Ollie', 
@@ -193,6 +197,7 @@ const createInitialUsers = async () => {
       	username: 'imonlyseven', 
       	password: 'sevenisbest', 
       	imageURL: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Child_sledding_head-first_on_a_toboggan.jpg/1200px-Child_sledding_head-first_on_a_toboggan.jpg',
+      	isAdmin: false,
       },
     ];
   	

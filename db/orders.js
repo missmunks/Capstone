@@ -1,9 +1,7 @@
 const {client} = require('./index');
 const { getUserById } = require('./users');
 
-//----------------------------------------------------
-//can't make join work without distorting the data, or not returning orders without products.
-//this set of functions, using getAndAppendProducts as a return statement (promise.all'd when necessary) works.
+
 const getOrderProductsByOrder = async(orderId) => {
 	try{
 		const { rows: orderProducts } = await client.query(`
@@ -28,8 +26,6 @@ const getAndAppendProducts = async (order) => {
 		throw error;
 	}
 };
-//----------------------------------------------------
-
 
 
 
@@ -68,12 +64,13 @@ const getOrdersByUser = async ({id}) => {
 			FROM orders
 			WHERE "userId"=${id};
 		`);
-		return getAndAppendProducts(order);
+		return Promise.all(orders.map(order => getAndAppendProducts(order)));	
 	}
 	catch(error){
 		throw error;
 	}
 };
+
 
 
 

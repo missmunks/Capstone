@@ -2,6 +2,8 @@ const express = require('express');
 const { getAllOrders, getOrderById, getOrdersByUser } = require('../db/orders');
 const { addProductToOrder, getOrderProductById, updateOrderProduct, destroyOrderProduct } = require('../db/orderProducts');
 const ordersRouter = express.Router();
+const {createOrder} = require('../db/index')
+const { requireUser } = require('./utils');
 
 ordersRouter.get('/', async(req, res, next) => {
 	try{
@@ -23,6 +25,23 @@ ordersRouter.get('/:id', async(req, res, next) => {
 		next(error);
 	}
 });
+
+ordersRouter.post('/', requireUser, async(req, res, next) => {
+    const { id } = req.user;
+    const userId = id;
+    const orderData = {};
+    try {
+        orderData.userId = userId
+        orderData.status = 'created';
+        const newOrder = await createOrder(orderData)
+        if (newOrder){    
+        res.send(newOrder)
+        } 
+    } catch (error) {
+        next(error)
+    }
+
+})
 
 //needs to add order_product to order
 ordersRouter.post('/:orderId/products', async(req, res, next) => {

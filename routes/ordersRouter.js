@@ -58,18 +58,19 @@ ordersRouter.post('/', requireUser, async(req, res, next) => {
 })
 
 //needs to add order_product to order
-ordersRouter.post('/:orderId/products', async(req, res, next) => {
+ordersRouter.post('/:orderId/products', requireUser, async(req, res, next) => {
 	const { orderId } = req.params;
-    const {productId, price, quantity} = req.body;
+  const {productId, price, quantity} = req.body;
+  const user = req.user;
 	try{
-		const order_product = await getOrderProductById(productId);
-		if(order_product){
-            const updated = await updateOrderProduct({id: order_product.id, quantity: quantity});
-		    res.send({updated, message: 'updated'});
-        }else{
-            const newOrderProduct = await addProductToOrder({orderId, productId, price, quantity});
-            res.send({newOrderProduct, message: 'new order_product'});
-        }
+		const order = await getOrderById(orderId*1);
+		if(order.userId === user.id){
+			const addedProduct = await addProductToOrder({orderId, productId, price, quantity});
+			res.send(addedProduct);
+		}
+		else{
+			res.send({message:'either thats not your order to add products to, or we goofed'});
+		}
 	}
 	catch(error){
 		next(error);

@@ -26,7 +26,6 @@ usersRouter.get('/', requireUser, requireAdmin, async (req, res, next) => {
 
 usersRouter.get('/me', requireUser, async (req, res, next) => {
   const {user} = req;
-  console.log("checking user", user)
     try{
       res.send(user);
     }catch(err){
@@ -90,21 +89,15 @@ usersRouter.post('/login', async(req, res, next) => {
 });
 
 usersRouter.get('/:userId/orders', requireUser, async(req,res,next) =>{
-  console.log('sandwich')
   try {
     const { userId } = req.params;
-    console.log(userId, 'this is the id')
-    const user = await getUserById(userId);
-    console.log("user!!!!!", user)
-    if(!user) {
-      throw new Error ('log in, silly')
-    } else if(user.id == userId) {
-      console.log(user.id, 'this is the userid')
+    console.log('USER ID PARAMS:', userId, 'USER REQ:', req.user);
+    if(req.user.id === userId*1) {
       const orders = await getOrdersByUser({id: userId});
-      console.log("orders:", orders)
       res.send(orders);
-    }else{
-      res.send('not your order')
+    }
+    else{
+    	res.send({message: 'not your order'});
     }
   } catch (error) {
     next(error)

@@ -1,6 +1,19 @@
 const express = require('express');
-const { getAllOrders, getOrderById, getOrdersByUser, getCartByUser } = require('../db/orders');
-const { addProductToOrder, getOrderProductById, updateOrderProduct, destroyOrderProduct } = require('../db/orderProducts');
+const { 
+	getAllOrders, 
+	getOrderById, 
+	getOrdersByUser, 
+	getCartByUser, 
+	updateOrder, 
+	completeOrder,
+	cancelOrder 
+} = require('../db/orders');
+const { 
+	addProductToOrder, 
+	getOrderProductById, 
+	updateOrderProduct, 
+	destroyOrderProduct 
+} = require('../db/orderProducts');
 const ordersRouter = express.Router();
 const {createOrder} = require('../db/index')
 const { requireUser, requireAdmin } = require('./utils');
@@ -76,8 +89,51 @@ ordersRouter.post('/:orderId/products', requireUser, async(req, res, next) => {
 		next(error);
 	}
 });
-
-
+//TESTED WORKING
+ordersRouter.patch('/:orderId', requireUser, async(req, res, next) => {
+	const { orderId } = req.params;
+	const { status, userId } = req.body;
+	const user = req.user;
+	
+	try{
+		const order = await getOrderById(orderId*1);
+		if(order.userId === user.id && status === 'completed'){
+			console.log('USING THE COMPLETE IF');
+			const completedOrder = await updateOrder({id: orderId, status, userId});
+			res.send(completedOrder);
+		}
+		else if(order.userId === user.id){
+			console.log('USING THE UPDATE IF');
+			const updatedOrder = await updateOrder({id: orderId, status, userId});
+			res.send(updatedOrder);
+		}
+		else{
+			res.send({message:'either thats not your order to add products to, or we goofed'});
+		}
+	}
+	catch(error){
+		next(error)
+	}
+});
+//TESTED WORKING
+ordersRouter.delete('/:orderId', requireUser, async(req, res, next) => {
+	const { orderId } = req.params;
+	const user = req.user;
+	
+	try{
+		const order = await getOrderById(orderId*1);
+		if(order.userId === user.id){
+			const cancelledOrder = await cancelOrder(orderId);
+			res.send(cancelledOrder);
+		}
+		else{
+			res.send({message:'either thats not your order to add products to, or we goofed'});
+		}
+	}
+	catch(error){
+		next(error)
+	}
+});
 
 
 

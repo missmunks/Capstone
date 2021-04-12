@@ -88,15 +88,85 @@ const getOrdersByProduct = async ({ id }) => {
 
 const getCartByUser = async ({id}) => {
 	try{
-	const orders = await getOrdersByUser({id});
-	const cart = orders.filter(order => order.status === 'created')
-	return cart;
+		const orders = await getOrdersByUser({id});
+		const cart = orders.filter(order => order.status === 'created')
+		return cart;
 	}catch(error){
 		throw error;
 	}
 
 };
 
+//TESTED WORKING
+const updateOrder = async ({ id, status, userId }) => {
+	const settingObj = { status, userId };
+	
+	function createUpdate(table, data) {
+    if (!table || typeof table !== 'string') {
+        throw new TypeError("Parameter 'table' must be a non-empty string.");
+    }
+    if (!data || typeof data !== 'object') {
+        throw new TypeError("Parameter 'data' must be an object.");
+    }
+    var keys = Object.keys(data)
+        .filter(function (k) {
+            return data[k] !== undefined;
+        });
+    var names = keys.map(function (k, index) {
+        return '"' + k + '"' + ' = $' + (index + 1);
+    }).join(', ');
+    var values = keys.map(function (k) {
+        return data[k];
+    });
+    return {
+        query: 'UPDATE ' + table + ' SET ' + names + ` WHERE id=${id} RETURNING *;`,
+        values: values
+    };
+	}
+	
+	const update = createUpdate('orders', settingObj);
+	
+	
+	try{
+		const {rows: [order] } = await client.query(update.query, update.values);
+		return order;
+	}
+	catch(error){
+		throw error;
+	}
+};
+
+//TESTED WORKING
+const completeOrder = async ({ id }) => {
+	try{
+		const { rows: [completedOrder] } = await client.query(`
+			UPDATE orders
+			SET status='completed'
+			WHERE id=${id}
+			RETURNING *;
+		`);
+		return completedOrder;
+	}
+	catch(error){
+		throw error;
+	}
+};
+
+//TESTED WORKING
+const cancelOrder = async (id) => {
+	try{
+		const {rows: [cancelledOrder]} = await client.query(`
+			UPDATE orders
+			SET status='cancelled'
+			WHERE id=${id}
+			RETURNING *;
+		`);
+		return cancelledOrder;
+	}
+	catch(error){
+		throw error;
+	}
+};
 
 
 
@@ -106,4 +176,7 @@ module.exports = {
 	getOrdersByUser,
 	getOrdersByProduct,
 	getCartByUser,
+	updateOrder,
+	completeOrder,
+	cancelOrder
 }

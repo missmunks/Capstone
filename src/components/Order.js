@@ -15,7 +15,7 @@ const Order = ({order}) => {
 			<h3>Status: {order.status}</h3>
 			<h3>Products:</h3>
 			<ul>
-				{order.products.map(product => {
+				{order.products && order.products.map(product => {
 					return <div className='order-product' key={product.id}>
 						<h4>Product ID: {product.id}</h4>
 						<h4>Price: {product.price}</h4>

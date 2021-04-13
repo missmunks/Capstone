@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Link, useHistory, useParams} from 'react-router-dom';
 import { getProductById } from '../api/index.js';
 
-const Product = ({products, product}) => {
+const Product = ({products, product, cart, setCart}) => {
 	const {id} = useParams();
 	const [singleProduct, setSingleProduct ] = useState({});
 
@@ -27,6 +27,11 @@ const Product = ({products, product}) => {
 		}
 	}, [id])
 
+	const handleAddToCart = () => {
+		const newCart = [...cart, product];
+		setCart(newCart);
+	}
+
 	if(product){
 		return <>
 			<h3 className='products-list-name'>
@@ -36,7 +41,7 @@ const Product = ({products, product}) => {
 				<li>description: {product.description}</li>
 				<li>in stock? {product.inStock ? 'yes' : 'no' }</li>
 				<li>price: ${product.price}</li>
-				<button>Add to Cart</button>
+				<button onClick={handleAddToCart}>Add to Cart</button>
 			</ul>
 		</>
 	}else{

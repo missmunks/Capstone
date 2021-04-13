@@ -29,12 +29,22 @@ const Product = ({ product, cart, setCart}) => {
 
 	const handleAddToCart = () => {
 		const newCart = { ...cart };
-		newCart.products = [...newCart.products, product];
-		setCart(newCart)
+		let hasItem = false;
 
-		// const newCart = [...cart, product];
-		// setCart(newCart);
+		for(let i=0; i<newCart.products.length; i++) {
+			if(newCart.products[i].id === product.id) {
+				hasItem = true;
+				newCart.products[i].quantity = newCart.products[i].quantity +1;
+			}
+		}
+		if(!hasItem) {
+			newCart.products = [...newCart.products, {...product, quantity: 1}];
+		}
+
+		setCart(newCart)
 	}
+
+	// update the price in the cart!
 
 	if(product){
 		return <>

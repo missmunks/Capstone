@@ -90,3 +90,17 @@ export async function getOrdersByUser(user, token) {
 		throw error;
 	}
 }
+
+export async function getCart(token) {
+	try{
+		const {data} = await axios.get(`api/orders/cart`, {
+			headers: {
+				Authorization : `Bearer ${token}`
+			}
+		});
+		return data;
+	}
+	catch(error){
+		throw error;
+	}
+}

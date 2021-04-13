@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {Link, useHistory, useParams} from 'react-router-dom';
 import { getOrderById } from '../api';
 
-
 const Order = ({order}) => {
 
 	if (!order){
@@ -10,7 +9,6 @@ const Order = ({order}) => {
 	}
 	return <div>
 	
-		<div></div>
 		<div className='single-order'>
 			<h3>Order id: {order.id}</h3>
 			<h3>Date Placed: {order.datePlaced}</h3>
@@ -29,9 +27,5 @@ const Order = ({order}) => {
 	
 	</div>
 };
-
-
-
-
 
 export default Order;

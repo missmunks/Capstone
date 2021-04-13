@@ -21,7 +21,7 @@ const Orders = ({orders, setOrders, token, user}) => {
 	} , [user]);
 	
 	return <>
-		<div>THIS WILL BE ALL OF A USERS ORDERS</div>
+		<div>Your orders:</div>
 		<div className='orders-list'>
 			{orders.map(order => {
 				return <div key={order.id}>

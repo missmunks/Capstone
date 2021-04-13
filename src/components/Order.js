@@ -4,10 +4,12 @@ import { getOrderById } from '../api';
 
 
 const Order = ({order}) => {
-
+	if (!order){
+		return <div>NO ORDER</div>
+	}
 	return <div>
 	
-		<div>THIS WILL BE ONE ORDER</div>
+		<div></div>
 		<div className='single-order'>
 			<h3>Order id: {order.id}</h3>
 			<h3>Date Placed: {order.datePlaced}</h3>

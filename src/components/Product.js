@@ -53,6 +53,4 @@ const Product = ({products, product}) => {
 	}
 };
 
-// why are we using 2 returns? difference between singleProduct and products?
-
 export default Product;

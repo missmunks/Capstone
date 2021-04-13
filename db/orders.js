@@ -89,7 +89,7 @@ const getOrdersByProduct = async ({ id }) => {
 const getCartByUser = async ({id}) => {
 	try{
 		const orders = await getOrdersByUser({id});
-		const cart = orders.filter(order => order.status === 'created')
+		const [cart] = orders.filter(order => order.status === 'created')
 		return cart;
 	}catch(error){
 		throw error;

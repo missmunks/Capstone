@@ -1,9 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useHistory, useParams} from 'react-router-dom';
 import { getOrderById } from '../api';
-//add name, description to products
+
+import {Button, Card} from 'react-bootstrap';
+
+
 const Order = ({order}) => {
 
+	if (!order){
+		return <div>NO ORDER</div>
+	}
 	return <div>
 	
 		<div className='single-order'>

@@ -17,6 +17,7 @@ import{
 	MyAccount,
 	Order,
 	Orders,
+	Cart,
 } from './';
 
 const App = () => {
@@ -40,7 +41,8 @@ const App = () => {
 		}
 	});
 	const [orders, setOrders] = useState([]);
-	console.log('orders from state, ', orders);
+
+	const [cart, setCart] = useState({products: []});
 	
 	const fetchAndSetProducts = async () => {
 		try{
@@ -97,6 +99,9 @@ const App = () => {
 			
 			<Route exact path ='/orders/:orderId'>
 				<Order />
+			</Route>
+			<Route exact path ='/cart'>
+				<Cart cart={cart} setCart={setCart} token={token}/>
 			</Route>
 			
     </div>

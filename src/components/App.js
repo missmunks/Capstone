@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
-
-
 import {
   getSomething,
   getAllProducts,
@@ -42,7 +40,7 @@ const App = () => {
 		}
 	});
 	const [orders, setOrders] = useState([]);
-	
+	console.log('orders from state, ', orders);
 	
 	const fetchAndSetProducts = async () => {
 		try{
@@ -90,7 +88,7 @@ const App = () => {
 				<Login setToken={setToken} setUser={setUser}/>
 			</Route>
 			<Route exact path ='/myaccount'>
-				<MyAccount token={token} user={user}/>
+				<MyAccount token={token} user={user} orders={orders} setOrders={setOrders} />
 			</Route>
 			
 			<Route exact path ='/orders'>

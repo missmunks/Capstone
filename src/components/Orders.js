@@ -3,12 +3,13 @@ import {Link, useHistory, useParams} from 'react-router-dom';
 import {getOrdersByUser} from '../api';
 import {Order} from './';
 
-
 const Orders = ({orders, setOrders, token, user}) => {
+	console.log('orders from orders, ', orders);
 	const userId = user.id;
 	const fetchAndSetOrders = async (user, token) => {
 		try{
 			const queriedOrders = await getOrdersByUser(user, token);
+			console.log(queriedOrders);
 			setOrders(queriedOrders);
 		}
 		catch(error){
@@ -21,8 +22,8 @@ const Orders = ({orders, setOrders, token, user}) => {
 	} , [user]);
 	
 	return <>
-		<div>THIS WILL BE ALL OF A USERS ORDERS</div>
 		<div className='orders-list'>
+			<h2>Your Previous Orders</h2>
 			{orders.map(order => {
 				return <div key={order.id}>
 					<Order order={order} />
@@ -31,9 +32,5 @@ const Orders = ({orders, setOrders, token, user}) => {
 		</div>
 	</>
 };
-
-
-
-
 
 export default Orders;

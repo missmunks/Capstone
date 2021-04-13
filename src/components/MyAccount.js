@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useHistory, useParams} from 'react-router-dom';
 import {getMe} from '../api/index.js';
+import {Orders} from './';
 
-
-const MyAccount = ({user, token}) => {
+const MyAccount = ({user, token, orders, setOrders}) => {
+	console.log('orders from my account, ', orders);
 	const [myData, setMyData] = useState({});
 	const getCurrentUser = async (token) => {
 		try{
@@ -27,9 +28,8 @@ const MyAccount = ({user, token}) => {
 
 	return <>
 		<h3>{user.username}'s account page</h3>
-		<div>THIS FETCHES ALL DATA FROM THE USER BUT THERES NOTHING INTERESTING TO SHOW. MAYBE SOON IT NEEDS TO BE UPDATED TO FETCH THE CART/ FETCH PREVIOUS ORDERS FROM THE USER/ ALLOW THE USER TO UPDATE THEIR INFO.</div>
+		<div><Orders orders={orders} setOrders={setOrders} token={token} user={user} /></div>
 	</>
 }
-
 
 export default MyAccount;

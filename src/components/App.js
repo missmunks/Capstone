@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
 import {
   getSomething,
-  getAllProducts
+  getAllProducts,
 } from '../api';
 
 import{
@@ -17,6 +17,8 @@ import{
   Register,
 	Login,
 	MyAccount,
+	Order,
+	Orders,
 } from './';
 
 const App = () => {
@@ -39,7 +41,7 @@ const App = () => {
 			return {};
 		}
 	});
-	console.log('THE CURRENT USER', user);
+	const [orders, setOrders] = useState([]);
 	
 	
 	const fetchAndSetProducts = async () => {
@@ -89,6 +91,14 @@ const App = () => {
 			</Route>
 			<Route exact path ='/myaccount'>
 				<MyAccount token={token} user={user}/>
+			</Route>
+			
+			<Route exact path ='/orders'>
+				<Orders orders={orders} setOrders={setOrders} token={token} user={user}/>
+			</Route>
+			
+			<Route exact path ='/orders/:orderId'>
+				<Order />
 			</Route>
 			
     </div>

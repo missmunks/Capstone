@@ -76,3 +76,17 @@ export async function getMe(token) {
 		throw error;
 	}
 };
+
+export async function getOrdersByUser(user, token) {
+	try{
+		const {data} = await axios.get(`/api/users/${user.id}/orders`, {
+			headers: {
+				Authorization : `Bearer ${token}`
+			}
+		});
+		return data
+	}
+	catch(error){
+		throw error;
+	}
+}

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Link, useHistory, useParams} from 'react-router-dom';
 import { getProductById } from '../api/index.js';
 
-const Product = ({products, product, cart, setCart}) => {
+const Product = ({ product, cart, setCart}) => {
 	const {id} = useParams();
 	const [singleProduct, setSingleProduct ] = useState({});
 
@@ -28,8 +28,12 @@ const Product = ({products, product, cart, setCart}) => {
 	}, [id])
 
 	const handleAddToCart = () => {
-		const newCart = [...cart, product];
-		setCart(newCart);
+		const newCart = { ...cart };
+		newCart.products = [...newCart.products, product];
+		setCart(newCart)
+
+		// const newCart = [...cart, product];
+		// setCart(newCart);
 	}
 
 	if(product){

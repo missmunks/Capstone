@@ -17,7 +17,7 @@ const Cart = ({cart, setCart, token}) => {
 	};
 	
 	useEffect(()=>{
-		fetchAndSetCart(token);
+		// fetchAndSetCart(token);
 	} , [token]);
 	
 	return <Order order={cart} type={'cart'}/>

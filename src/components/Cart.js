@@ -20,7 +20,7 @@ const Cart = ({cart, setCart, token}) => {
 		// fetchAndSetCart(token);
 	} , [token]);
 
-	// when is it the correct time to set the cart?
+	// when is it the correct time to set the cart? login? logout?
 	// what state variables are neccessary?
 	
 	return <Order order={cart} type={'cart'}/>
@@ -38,3 +38,5 @@ export default Cart;
 		// } else {
 		// 	return ''
 		// }
+
+	// also possible to update the database instead of local

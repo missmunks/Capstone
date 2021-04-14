@@ -43,6 +43,9 @@ const App = () => {
 	const [orders, setOrders] = useState([]);
 
 	const [cart, setCart] = useState({products: []});
+
+	// local storage: 
+	// else { return DEFAULT VALUE}
 	
 	const fetchAndSetProducts = async () => {
 		try{
@@ -75,7 +78,7 @@ const App = () => {
       <h2>{ message }</h2>
 
       <Route exact path='/products'>
-      	<Products products={products} setProducts={setProducts}/>
+      	<Products products={products} setProducts={setProducts} cart={cart} setCart={setCart}/>
       </Route>
 
 			<Route exact path={`/products/:id`}>

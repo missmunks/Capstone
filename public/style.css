@@ -2,7 +2,7 @@ body {
     background-color: solid white;
     font-size: 14px;
     margin-bottom: .4px;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Spectral', serif;
   }
 
 /*HEADER*/
@@ -23,7 +23,39 @@ a {
   font-size: 15px;
 }
 
+hr {
+  background-color: #5B3D29;
+  height: 1em;
+}
+
 /* MAIN BODY */
+
+  /* HOME */
+    .homePage {
+      display: flex;
+      flex-direction: column;
+      flex: 0 1 auto;
+      align-items: center;
+      color: #5B3D29;
+      height: 110%;
+      }
+
+  h2[type=homeText] {
+    font-family: 'PT Sans Narrow', sans-serif;
+  }
+
+  .homePhoto {
+    display: flex;
+    align-items: flex-start;
+    height: 60em;
+  }
+
+  .productsHomeLink {
+    padding: 1em;
+    color: rgb(153, 87, 56);
+    font-size: 25px;
+  }
+
 .bulk {
   display: flex;
   flex-direction: column;
@@ -43,32 +75,54 @@ h2 {
 }
 
 .accountform{
-    height: 40em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
+    margin: 2em;
+    height: 40em;
 }
 
 button[type=submit] {
-    height: 40px;
-    width: 80px;
+    height: 35px;
+    width: 100px;
     border: 2px solid #5B3D29;
+    background-color: white;
+    font-family: 'PT Sans Narrow', sans-serif;
     margin-top: 15px;
 }
+
 input[type=text] {
   border: 2px solid #5B3D29;
   width: 200px;
   height: 50px;
+  font-family: 'Work Sans', sans-serif;
 }
+
 input[type=password] {
   border: 2px solid #5B3D29;
   width: 200px;
   height: 50px;
+  font-family: 'Work Sans', sans-serif;
 }
+
 .reg-log{
     color: black;
 }
+
+/* CART */
+button[type=addToCart] {
+  border: 2px solid rgb(153, 87, 56);
+  background-color: white;
+  font-family: 'Work Sans', sans-serif;
+  width: 100px;
+  height: 35px;
+  margin-top: 15px;
+}
+
+/* button {
+  color: solid white;
+  background-color: #5B3D29;
+} */
 
 
 /*FOOTER*/
@@ -77,6 +131,7 @@ input[type=password] {
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  font-family: 'Overpass Mono', monospace;
   color: #5B3D29;
   font-size: 14px;
 }

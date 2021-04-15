@@ -44,8 +44,6 @@ const Product = ({ product, cart, setCart}) => {
 		setCart(newCart)
 	}
 
-	// update the price in the cart!
-
 	if(product){
 		return <>
 			<h3 className='products-list-name'>

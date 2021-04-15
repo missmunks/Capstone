@@ -60,7 +60,9 @@ const App = () => {
 				return
 			}
 			const queriedCart = await getCart(token);
-			setCart(queriedCart);
+			if(queriedCart){
+				setCart(queriedCart);
+			}
 		}
 		catch(error){
 			console.log(error);
@@ -117,7 +119,7 @@ const App = () => {
 			</Route>
 
 			<Route exact path ='/cart'>
-				<Cart fetchAndSetCart={fetchAndSetCart} cart={cart} setCart={setCart} token={token}/>
+				<Cart cart={cart} setCart={setCart} token={token} fetchAndSetCart={fetchAndSetCart}/>
 			</Route>
     </div>
 

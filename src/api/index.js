@@ -138,3 +138,37 @@ export async function addToCart(cartId, product, token) {
 		throw error;
 	}
 }
+
+export async function cancelOrder(order, token) {
+	try{
+		console.log(order, 'this is the order from the cancel order api index')
+		console.log(token, 'this is the token from the cancelOrder')
+		const {data} = await axios.delete(`/api/orders/${order}`, {
+			headers: {
+				Authorization : `Bearer ${token}`
+			}
+		// data = null;
+		});
+	  }catch(error) {
+		throw error;
+	}
+}
+
+export async function completeOrder(order, token, orderId) {
+	console.log(orderId)
+	console.log(token, '66666666666666666666666666')
+	console.log(order, '44444444444444444')
+try{
+const {data} = await axios.patch(`api/orders/${order}`, {status : 'completed'}, {
+	headers: {
+		Authorization : `Bearer ${token}`
+	},	
+
+})
+
+}catch(error) {
+throw error;
+}
+}
+
+

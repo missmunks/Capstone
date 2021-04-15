@@ -3,7 +3,7 @@ import {Link, useHistory, useParams} from 'react-router-dom';
 import {getOrdersByUser} from '../api';
 import {Order} from './';
 
-const Orders = ({orders, setOrders, token, user}) => {
+const Orders = ({orders, setOrders, token, user, setCart}) => {
 	console.log('orders from orders, ', orders);
 	const userId = user.id;
 	const fetchAndSetOrders = async (user, token) => {
@@ -16,7 +16,7 @@ const Orders = ({orders, setOrders, token, user}) => {
 			console.log(error);
 		}
 	};
-	
+	console.log(orders, '111111111111111111111111111111')
 	useEffect(()=>{
 		fetchAndSetOrders(user, token);
 	} , [user]);
@@ -25,8 +25,9 @@ const Orders = ({orders, setOrders, token, user}) => {
 		<div className='orders-list'>
 			<h2>Your Previous Orders</h2>
 			{orders.map(order => {
+				console.log(order, '999999999999999999999999999999999999999999999999999999999999999999999')
 				return <div key={order.id}>
-					<Order order={order} />
+					<Order order={order} setCart = {setCart}/>
 				</div>
 			})}
 		</div>

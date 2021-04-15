@@ -113,7 +113,7 @@ const App = () => {
 				<Order />
 			</Route>
 			<Route exact path ='/cart'>
-				<Cart cart={cart} setCart={setCart} token={token}/>
+				<Cart fetchAndSetCart={fetchAndSetCart} cart={cart} setCart={setCart} token={token}/>
 			</Route>
 			
     </div>

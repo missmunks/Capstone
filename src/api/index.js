@@ -138,3 +138,12 @@ export async function addToCart(cartId, product, token) {
 		throw error;
 	}
 }
+
+export async function removeFromCart(orderProductId){
+	try{
+		const {data} = await axios.delete(`api/order_products/${orderProductId}`);
+		return data;
+	}catch(error){
+		throw error;
+	}
+}

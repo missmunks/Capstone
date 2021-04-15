@@ -74,6 +74,7 @@ ordersRouter.post('/', requireUser, async(req, res, next) => {
 ordersRouter.post('/:orderId/products', requireUser, async(req, res, next) => {
 	const { orderId } = req.params;
   const {productId, price, quantity} = req.body;
+  console.log('req.body', req.body);
   const user = req.user;
 	try{
 		const order = await getOrderById(orderId*1);
@@ -98,12 +99,10 @@ ordersRouter.patch('/:orderId', requireUser, async(req, res, next) => {
 	try{
 		const order = await getOrderById(orderId*1);
 		if(order.userId === user.id && status === 'completed'){
-			console.log('USING THE COMPLETE IF');
 			const completedOrder = await updateOrder({id: orderId, status, userId});
 			res.send(completedOrder);
 		}
 		else if(order.userId === user.id){
-			console.log('USING THE UPDATE IF');
 			const updatedOrder = await updateOrder({id: orderId, status, userId});
 			res.send(updatedOrder);
 		}

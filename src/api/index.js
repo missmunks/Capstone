@@ -104,3 +104,37 @@ export async function getCart(token) {
 		throw error;
 	}
 }
+
+//the route this queries currently requires user... so we'll have to change that for non-users to make a cart
+export async function createOrder(token) {
+	try{
+		const {data} = await axios.post(`api/orders`, {}, {
+			headers: {
+				Authorization : `Bearer ${token}`
+			}
+		});
+		return data;
+	}
+	catch(error){
+		throw error;
+	}
+}
+
+export async function addToCart(cartId, product, token) {
+	try{
+		console.log('/api/index.js THE ADDTOOCART FUNCTION NEEDS ADD AN ORDER TO THE CART WITH AN AXIOS CALL', cartId, product, token);
+		const {data} = await axios.post(`api/orders/${cartId}/products`, {
+			productId: product.id, 
+			price: product.price, 
+			quantity : 1,
+		}, {
+			headers: {
+				Authorization : `Bearer ${token}`
+			}
+		});
+		return data;
+	}
+	catch(error){
+		throw error;
+	}
+}

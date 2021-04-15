@@ -45,9 +45,6 @@ const App = () => {
 
 	const [cart, setCart] = useState({products: []});
 
-	// local storage: 
-	// else { return DEFAULT VALUE}
-	
 	const fetchAndSetProducts = async () => {
 		try{
 		  const queriedProducts = await getAllProducts();

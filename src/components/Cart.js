@@ -5,6 +5,7 @@ import { getCart } from '../api';
 
 
 const Cart = ({cart, setCart, token}) => {
+
 	const fetchAndSetCart = async (token) => {
 		try{
 			const queriedCart = await getCart(token);
@@ -18,6 +19,7 @@ const Cart = ({cart, setCart, token}) => {
 	useEffect(()=>{
 		// fetchAndSetCart(token);
 	} , [token]);
+
 	
 	return <Order order={cart} type={'cart'}/>
 };

@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useHistory, useParams} from 'react-router-dom';
-import { getProductById } from '../api/index.js';
+import { getProductById, createOrder, addToCart } from '../api/index.js';
 
-const Product = ({ product, cart, setCart}) => {
+const Product = ({ product, cart, setCart, token}) => {
 	const {id} = useParams();
-	const [singleProduct, setSingleProduct ] = useState({});
+	const [singleProduct, setSingleProduct ] = useState(product ? product : {});
 
 	const getProduct = async (id) => {
 		try{
@@ -27,21 +27,24 @@ const Product = ({ product, cart, setCart}) => {
 		}
 	}, [id])
 
-	const handleAddToCart = () => {
-		const newCart = { ...cart };
-		let hasItem = false;
-
-		for(let i=0; i<newCart.products.length; i++) {
-			if(newCart.products[i].id === product.id) {
-				hasItem = true;
-				newCart.products[i].quantity = newCart.products[i].quantity +1;
+	const handleAddToCart = async () => {
+		try{
+			if (cart.id){
+				console.log('THERE IS A CART IN STATE, the current product and cart need to be passed into addToCart()');
+				//call addOrderToCart route
+				addToCart(cart.id, singleProduct, token);
+			}
+			else {
+				console.log('THERE IS NO CART IN STATE, the current product and cart need to be passed into addToCart()');
+				//create an order with the status "created" and then call addOrderToCart
+				const newCart = await createOrder(token);
+				console.log('the new cart', newCart);
+				addToCart(newCart.id, singleProduct, token);
 			}
 		}
-		if(!hasItem) {
-			newCart.products = [...newCart.products, {...product, quantity: 1}];
+		catch(error){
+			throw error;
 		}
-
-		setCart(newCart)
 	}
 
 	// update the price in the cart!

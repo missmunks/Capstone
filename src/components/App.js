@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import {
   getSomething,
   getAllProducts,
+  getCart,
 } from '../api';
 
 import{
@@ -53,6 +54,18 @@ const App = () => {
     	console.log(error)
     }
 	};
+	const fetchAndSetCart = async (token) => {
+		try{
+			if (!token){
+				return
+			}
+			const queriedCart = await getCart(token);
+			setCart(queriedCart);
+		}
+		catch(error){
+			console.log(error);
+		}
+	};
 	
 	
   useEffect(() => {
@@ -64,22 +77,21 @@ const App = () => {
         setMessage(error.message);
       });
 		fetchAndSetProducts();
-  }, []);
+		fetchAndSetCart(token);
+  }, [token]);
 
   return <>
     <Header token={token} setToken={setToken} user={user} setUser={setUser}/>
 
     <div className="bulk">
       
-      <h1>Hello, World!</h1>
-      <h2>{ message }</h2>
 
       <Route exact path='/products'>
-      	<Products products={products} setProducts={setProducts} cart={cart} setCart={setCart}/>
+      	<Products token={token} products={products} setProducts={setProducts} cart={cart} setCart={setCart}/>
       </Route>
 
 			<Route exact path={`/products/:id`}>
-				<Product products={products} />
+				<Product token={token} products={products} />
 			</Route>
 
 			<Route exact path='/register'>

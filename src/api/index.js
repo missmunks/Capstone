@@ -70,6 +70,7 @@ export async function getMe(token) {
 				Authorization : `Bearer ${token}`
 			}
 		});
+		console.log(data, '88888888888888888888xxxxxxxxxxxxxxxxxxxx')
 		return data;
 	}
 	catch(error){

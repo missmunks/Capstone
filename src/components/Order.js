@@ -2,12 +2,14 @@ import React, {useState, useEffect} from 'react';
 import {Link, useHistory, useParams} from 'react-router-dom';
 import { getOrderById, removeFromCart } from '../api';
 //add name, description to products
-const Order = ({order}) => {
+const Order = ({order, fetchAndSetCart, token, type}) => {
 	const handleProductRemove = async (id) => {
-		console.log('removing from cart');
 		const removed = await removeFromCart(id);
+		await fetchAndSetCart(token);
 	};
-
+	useEffect(()=>{
+		if(type==='cart'){fetchAndSetCart(token)}
+	} , []);
 	return <div>
 	
 		<div className='single-order'>
@@ -22,7 +24,7 @@ const Order = ({order}) => {
 						<h3>Product ID: {product.productId}</h3>
 						<h3>Price: {product.price}</h3>
 						<h3>Quantity: {product.quantity}</h3>
-						<button className="productRemove" onClick = {() => {handleProductRemove(product.id)}}>Remove</button>
+						{type === 'cart' ? <button className="productRemove" onClick = {() => {handleProductRemove(product.id)}}>Remove</button> : ''}
 					</div>
 				})}
 			</ul>

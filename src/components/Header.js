@@ -17,6 +17,7 @@ function Header({ children, token, setToken, user, setUser }) {
             <Nav token={token} setToken={setToken} user={user} setUser={setUser} style={style}>
                 { children }
             </Nav>
+            <hr/>
     </>
 }
 

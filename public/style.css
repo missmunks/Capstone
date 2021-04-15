@@ -20,11 +20,11 @@ nav.navLinks {
 a {
   padding: 1em;
   color: rgb(153, 87, 56);
-  font-size: 15px;
+  font-size: 23px;
 }
 
 hr {
-  background-color: #5B3D29;
+  background-color: rgb(204, 149, 123);
   height: 1em;
 }
 
@@ -53,9 +53,22 @@ hr {
   .productsHomeLink {
     padding: 1em;
     color: rgb(153, 87, 56);
-    font-size: 25px;
+    font-size: 20px;
   }
 
+  .loginHomeLink {
+    padding: 1em;
+    color: rgb(153, 87, 56);
+    font-size: 20px;
+  }
+
+  .homepageHR {
+    background-color: rgb(204, 149, 123);
+    height: .5em;
+    width: 100%;
+  }
+
+  /* MAIN */
 .bulk {
   display: flex;
   flex-direction: column;

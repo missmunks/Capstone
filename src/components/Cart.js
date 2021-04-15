@@ -5,7 +5,7 @@ import { getCart } from '../api';
 
 
 
-const Cart = ({cart, setCart, token, fetchAndSetCart, setCart}) => {
+const Cart = ({cart, setCart, token, fetchAndSetCart}) => {
 	return <Order order={cart} type={'cart'} fetchAndSetCart={fetchAndSetCart} token={token} setCart={setCart}/>
 };
 

@@ -4,32 +4,29 @@ import {Link, useHistory, useParams} from 'react-router-dom';
 import { getOrderById, cancelOrder, completeOrder, removeFromCart } from '../api';
 
 const Order = ({order, type, token, setCart, cart, fetchAndSetCart}) => {
-
-	if (!order){
-		return <div>NO ORDER</div>
+	const resetCartObj = {products: []};
+  const handleCancel = async (orderId, token) => {
+		if(!order) {
+    	return alert("There is no order to delete")
+		}
+		else{
+			try{
+				 await cancelOrder(orderId, token)
+			 	 setCart(resetCartObj)
+			}catch(error){
+  			throw error;
+	    }
+		}
 	}
-    const handleCancel = async (orderId, token) => {
-    		if(!order) {
-        	return alert("There is no order to delete")
-    			}else{
-    				try{
-       					 await cancelOrder(orderId, token)
-					 	 setCart('')
-    				}catch(error){
-        			throw error;
-   				    }
-    			}
-	}
-
-
-		const handleComplete = async(orderId, token) => {
-			if(!orderId) {
-				return alert("there is no order to complete")
-			}else {
-				try{
-					await completeOrder(order.id, token)
-					setCart('')
-			}catch(error) {
+	const handleComplete = async(orderId, token) => {
+		if(!orderId) {
+			return alert("there is no order to complete")
+		}
+		else{
+			try{
+				await completeOrder(order.id, token)
+				setCart(resetCartObj)
+			}catch(error){
 				throw error;
 			}
 		} 

@@ -139,6 +139,35 @@ export async function addToCart(cartId, product, token) {
 	}
 }
 
+export async function cancelOrder(order, token) {
+	try{
+		const {data} = await axios.delete(`/api/orders/${order}`, {
+			headers: {
+				Authorization : `Bearer ${token}`
+			}
+		// data = null;
+		});
+	  }catch(error) {
+		throw error;
+	}
+}
+
+export async function completeOrder(order, token, orderId) {
+
+try{
+const {data} = await axios.patch(`api/orders/${order}`, {status : 'completed'}, {
+	headers: {
+		Authorization : `Bearer ${token}`
+	},	
+
+})
+
+}catch(error) {
+throw error;
+}
+}
+
+
 export async function removeFromCart(orderProductId){
 	try{
 		const {data} = await axios.delete(`api/order_products/${orderProductId}`);

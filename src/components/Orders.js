@@ -3,7 +3,8 @@ import {Link, useHistory, useParams} from 'react-router-dom';
 import {getOrdersByUser} from '../api';
 import {Order} from './';
 
-const Orders = ({orders, setOrders, token, user}) => {
+const Orders = ({orders, setOrders, token, user, setCart}) => {
+
 	const userId = user.id;
 	const fetchAndSetOrders = async (user, token) => {
 		try{
@@ -24,7 +25,7 @@ const Orders = ({orders, setOrders, token, user}) => {
 			<h2>Your Previous Orders</h2>
 			{orders.map(order => {
 				return <div key={order.id}>
-					<Order order={order} />
+					<Order order={order} setCart = {setCart}/>
 				</div>
 			})}
 		</div>

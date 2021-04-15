@@ -9,7 +9,7 @@ import {
 
 import{
   Header,
-  Nav,
+  Home,
   Products,
   Product,
   Footer,
@@ -45,9 +45,6 @@ const App = () => {
 
 	const [cart, setCart] = useState({products: []});
 
-	// local storage: 
-	// else { return DEFAULT VALUE}
-	
 	const fetchAndSetProducts = async () => {
 		try{
 		  const queriedProducts = await getAllProducts();
@@ -87,11 +84,13 @@ const App = () => {
     <Header token={token} setToken={setToken} user={user} setUser={setUser}/>
 
     <div className="bulk">
-      
 
-      <Route exact path='/products'>
-      	<Products token={token} products={products} setProducts={setProducts} cart={cart} setCart={setCart}/>
-      </Route>
+			<Route exact path='/'>
+				{<Home user={user} />}
+			</Route>
+			<Route exact path='/products'>
+				<Products token={token} products={products} setProducts={setProducts} cart={cart} setCart={setCart}/>
+			</Route>
 
 			<Route exact path={`/products/:id`}>
 				<Product token={token} products={products} />
@@ -104,6 +103,7 @@ const App = () => {
 			<Route exact path='/login'>
 				<Login setToken={setToken} setUser={setUser}/>
 			</Route>
+
 			<Route exact path ='/myaccount'>
 				<MyAccount token={token} user={user} orders={orders} setOrders={setOrders} />
 			</Route>
@@ -115,10 +115,10 @@ const App = () => {
 			<Route exact path ='/orders/:orderId'>
 				<Order />
 			</Route>
+
 			<Route exact path ='/cart'>
 				<Cart cart={cart} setCart={setCart} token={token}/>
 			</Route>
-			
     </div>
 
     <Footer/>

@@ -81,7 +81,7 @@ const App = () => {
       });
 		fetchAndSetProducts();
 		fetchAndSetCart(token);
-  }, [token]);
+  }, [cart]);
 
   return <>
     <Header token={token} setToken={setToken} user={user} setUser={setUser}/>

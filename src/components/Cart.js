@@ -3,8 +3,11 @@ import {Link, useHistory} from 'react-router-dom';
 import {Order} from './';
 import { getCart } from '../api';
 
+const Cart = ({fetchAndSetCart, cart, setCart, token}) => {
 
-const Cart = ({cart, setCart, token}) => {
+	useEffect(()=> {
+		fetchAndSetCart(token);
+	},[])
 
 
 	

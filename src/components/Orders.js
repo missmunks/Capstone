@@ -4,12 +4,10 @@ import {getOrdersByUser} from '../api';
 import {Order} from './';
 
 const Orders = ({orders, setOrders, token, user}) => {
-	console.log('orders from orders, ', orders);
 	const userId = user.id;
 	const fetchAndSetOrders = async (user, token) => {
 		try{
 			const queriedOrders = await getOrdersByUser(user, token);
-			console.log(queriedOrders);
 			setOrders(queriedOrders);
 		}
 		catch(error){

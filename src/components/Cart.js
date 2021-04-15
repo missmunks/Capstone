@@ -5,8 +5,11 @@ import { getCart } from '../api';
 
 
 //needs to call GET /orders/cart with a token in the header, and render an Order component with the returned "order"
-const Cart = ({cart, setCart, token}) => {
+const Cart = ({fetchAndSetCart, cart, setCart, token}) => {
 
+	useEffect(()=> {
+		fetchAndSetCart(token);
+	},[])
 	
 	return <Order order={cart} type={'cart'}/>
 };

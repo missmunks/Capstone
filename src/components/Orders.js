@@ -15,7 +15,7 @@ const Orders = ({orders, setOrders, token, user, setCart}) => {
 			console.log(error);
 		}
 	};
-	console.log(orders, '111111111111111111111111111111')
+	
 	useEffect(()=>{
 		fetchAndSetOrders(user, token);
 	} , [user]);
@@ -24,7 +24,6 @@ const Orders = ({orders, setOrders, token, user, setCart}) => {
 		<div className='orders-list'>
 			<h2>Your Previous Orders</h2>
 			{orders.map(order => {
-				console.log(order, '999999999999999999999999999999999999999999999999999999999999999999999')
 				return <div key={order.id}>
 					<Order order={order} setCart = {setCart}/>
 				</div>

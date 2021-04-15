@@ -3,22 +3,15 @@ import {Link, useHistory, useParams} from 'react-router-dom';
 import { getOrderById, cancelOrder, completeOrder } from '../api';
 
 const Order = ({order, type, token, setCart, cart}) => {
-	console.log(token)
-	console.log(order, 'this is the order passed into order')
 
 	if (!order){
 		return <div>NO ORDER</div>
 	}
-
-	console.log(order.id, "##################################")
     const handleCancel = async (orderId, token) => {
-		console.log(order, 'uuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
-        console.log("I am starting to delete the order")
     		if(!order) {
         	return alert("There is no order to delete")
     			}else{
     				try{
-						console.log(token, 'token from hancleCancel 2')
        					 await cancelOrder(orderId, token)
 					 	 setCart('')
     				}catch(error){
@@ -29,13 +22,10 @@ const Order = ({order, type, token, setCart, cart}) => {
 
 
 		const handleComplete = async(orderId, token) => {
-			console.log('I am starting to handle the complete order')
 			if(!orderId) {
 				return alert("there is no order to complete")
 			}else {
 				try{
-					console.log(token, '888888888888888888888888888888')
-					console.log(order.id, 'ppppppppppppppppppppppppppppppp')
 					await completeOrder(order.id, token)
 					setCart('')
 			}catch(error) {

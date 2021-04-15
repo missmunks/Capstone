@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useHistory, useParams} from 'react-router-dom';
-import { getOrderById, cancelOrder, completeOrder } from '../api';
 
-const Order = ({order, type, token, setCart, cart}) => {
+import { getOrderById, cancelOrder, completeOrder, removeFromCart } from '../api';
+
+const Order = ({order, type, token, setCart, cart, fetchAndSetCart}) => {
 
 	if (!order){
 		return <div>NO ORDER</div>
@@ -33,8 +34,14 @@ const Order = ({order, type, token, setCart, cart}) => {
 			}
 		} 
 	}
-
-
+    
+	const handleProductRemove = async (id) => {
+		const removed = await removeFromCart(id);
+		await fetchAndSetCart(token);
+	};
+	useEffect(()=>{
+		if(type==='cart'){fetchAndSetCart(token)}
+	} , []);
 	return <div>
 	
 		<div className='single-order'>
@@ -45,11 +52,13 @@ const Order = ({order, type, token, setCart, cart}) => {
 			{token && type === 'cart' ? <button onClick = {() => {handleCancel(Number(order.id), token)}}>Cancel Order</button> : ''}
 			{token && type === 'cart' ? <button onClick = {() => {handleComplete(order.id, token)}}>Complete Order</button>  : ''}
 			<ul>
-				{order.products && order.products.map(product => {
+				{order.products.map(product => {
 					return <div className='order-product' key={product.id}>
-						<h4>Product ID: {product.id}</h4>
-						<h4>Price: {product.price}</h4>
-						<h4>Quantity: {product.quantity}</h4>
+						<h4>Product Name: {product.name}</h4>
+						<h3>Product ID: {product.productId}</h3>
+						<h3>Price: {product.price}</h3>
+						<h3>Quantity: {product.quantity}</h3>
+						{type === 'cart' ? <button className="productRemove" onClick = {() => {handleProductRemove(product.id)}}>Remove</button> : ''}
 					</div>
 				})}
 			</ul>

@@ -47,8 +47,6 @@ const Product = ({ product, cart, setCart, token}) => {
 		}
 	}
 
-	// update the price in the cart!
-
 	if(product){
 		return <>
 			<h3 className='products-list-name'>
@@ -58,7 +56,7 @@ const Product = ({ product, cart, setCart, token}) => {
 				<li>description: {product.description}</li>
 				<li>in stock? {product.inStock ? 'yes' : 'no' }</li>
 				<li>price: ${product.price}</li>
-				<button onClick={handleAddToCart}>Add to Cart</button>
+				<button type='addToCart' onClick={handleAddToCart}>Add to Cart</button>
 			</ul>
 		</>
 	}else{

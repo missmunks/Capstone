@@ -4,11 +4,9 @@ import {Order} from './';
 import { getCart } from '../api';
 
 
-const Cart = ({cart, setCart, token}) => {
 
-console.log(token, 'this is the token from cart')
-	
-	return <Order order={cart} type={'cart'} token= {token} setCart = {setCart}/>
+const Cart = ({cart, setCart, token, fetchAndSetCart, setCart}) => {
+	return <Order order={cart} type={'cart'} fetchAndSetCart={fetchAndSetCart} token={token} setCart={setCart}/>
 };
 
 export default Cart;

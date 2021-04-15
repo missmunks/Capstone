@@ -9,7 +9,7 @@ import {
 
 import{
   Header,
-  Nav,
+  Home,
   Products,
   Product,
   Footer,
@@ -60,7 +60,9 @@ const App = () => {
 				return
 			}
 			const queriedCart = await getCart(token);
-			setCart(queriedCart);
+			if(queriedCart){
+				setCart(queriedCart);
+			}
 		}
 		catch(error){
 			console.log(error);
@@ -84,11 +86,13 @@ const App = () => {
     <Header token={token} setToken={setToken} user={user} setUser={setUser}/>
 
     <div className="bulk">
-      
 
-      <Route exact path='/products'>
-      	<Products token={token} products={products} setProducts={setProducts} cart={cart} setCart={setCart}/>
-      </Route>
+			<Route exact path='/'>
+				{<Home user={user} />}
+			</Route>
+			<Route exact path='/products'>
+				<Products token={token} products={products} setProducts={setProducts} cart={cart} setCart={setCart}/>
+			</Route>
 
 			<Route exact path={`/products/:id`}>
 				<Product token={token} products={products} />
@@ -101,6 +105,7 @@ const App = () => {
 			<Route exact path='/login'>
 				<Login setToken={setToken} setUser={setUser}/>
 			</Route>
+
 			<Route exact path ='/myaccount'>
 				<MyAccount token={token} user={user} orders={orders} setOrders={setOrders} />
 			</Route>
@@ -112,10 +117,10 @@ const App = () => {
 			<Route exact path ='/orders/:orderId'>
 				<Order token = {token} setCart= {setCart} />
 			</Route>
+
 			<Route exact path ='/cart'>
-				<Cart cart={cart} setCart={setCart} token={token}/>
+				<Cart cart={cart} setCart={setCart} token={token} fetchAndSetCart={fetchAndSetCart}/>
 			</Route>
-			
     </div>
 
     <Footer/>

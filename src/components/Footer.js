@@ -23,6 +23,7 @@ const phantom = {
 
 function Footer({ children }) {
     return <>
+            <hr/>
             <div style={phantom} style={style}>
                 { children }
                 <p className="copyright">© 1796-3005, WE HAVE THINGS, Inc. or its affiliates</p>

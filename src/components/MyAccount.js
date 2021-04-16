@@ -4,12 +4,10 @@ import {getMe} from '../api/index.js';
 import {Orders} from './';
 
 const MyAccount = ({user, token, orders, setOrders}) => {
-	console.log(user, 'uuuuuuuuuuuuuuuuuuuuuuuuser')
 	const [myData, setMyData] = useState({});
 	const getCurrentUser = async (token) => {
 		try{
 			const theUser = await getMe(token);
-			console.log(theUser, 'the userrrrrrrrrrrrrrrrrrr')
 			return theUser;
 		}
 		catch(error){

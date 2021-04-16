@@ -21,12 +21,13 @@ const getUser = async ({username, password}) => {
         	SELECT *
         	FROM users
         	WHERE username=$1;
+         
         `, [username]);
 				if(user){
 		      const hashedPassword = user.password;
 		      const passwordsMatch = await bcrypt.compare(password, hashedPassword);
 		      if (passwordsMatch){
-		          const returnObj = { username: user.username, id: user.id };
+		          const returnObj = { username: user.username, id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, imageURL: user.imageURL };
 		          return returnObj;
 		      } 
       	}

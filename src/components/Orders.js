@@ -25,7 +25,7 @@ const Orders = ({orders, setOrders, token, user, setCart}) => {
 			<h2>Your Previous Orders</h2>
 			{orders.map(order => {
 				return <div key={order.id}>
-					<Order order={order} setCart = {setCart}/>
+					<Order order={order} setCart = {setCart} token={token}/>
 				</div>
 			})}
 		</div>

@@ -131,7 +131,7 @@ const createInitialProducts = async () => {
 				description: "LOOKS LIKE A FRY, TASTES LIKE A FISH!",
 				price: 15,
 				imageUrl: 'placeholder',
-				inStock: TRUE,
+				inStock: true,
 				category:  'possibly edible things'},
 				{ 	name: 'invisible hat',
 				description: "IT WOULD BE BEAUTIFUL IF YOU COULD SEE IT!",

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 
@@ -5,6 +6,7 @@ import {
   getSomething,
   getAllProducts,
   getCart,
+  getProductById,
 } from '../api';
 
 import{
@@ -61,6 +63,15 @@ const App = () => {
 			}
 			const queriedCart = await getCart(token);
 			if(queriedCart){
+				const prodNames = [];
+				for(let i = 0; i < queriedCart.products.length; i++){
+					const curr = queriedCart.products[i];
+					console.log(curr);
+					const currId = await getProductById(curr.productId);
+					console.log(currId);
+					curr.name = currId.name;
+					console.log(curr);
+				};
 				setCart(queriedCart);
 			}
 		}

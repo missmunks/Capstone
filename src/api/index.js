@@ -70,7 +70,6 @@ export async function getMe(token) {
 				Authorization : `Bearer ${token}`
 			}
 		});
-		console.log(data, '88888888888888888888xxxxxxxxxxxxxxxxxxxx')
 		return data;
 	}
 	catch(error){
@@ -123,7 +122,6 @@ export async function createOrder(token) {
 
 export async function addToCart(cartId, product, token) {
 	try{
-		console.log('/api/index.js THE ADDTOOCART FUNCTION NEEDS ADD AN ORDER TO THE CART WITH AN AXIOS CALL', cartId, product, token);
 		const {data} = await axios.post(`api/orders/${cartId}/products`, {
 			productId: product.id, 
 			price: product.price, 

@@ -13,7 +13,7 @@ const style = {
 
 function Header({ children, token, setToken, user, setUser }) {
     return <>
-            <img className="logo" src={logo}/>
+            <img alt='' className="logo" src={logo}/>
             <Nav token={token} setToken={setToken} user={user} setUser={setUser} style={style}>
                 { children }
             </Nav>

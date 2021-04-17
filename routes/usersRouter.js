@@ -91,7 +91,6 @@ usersRouter.post('/login', async(req, res, next) => {
 usersRouter.get('/:userId/orders', requireUser, async(req,res,next) =>{
   try {
     const { userId } = req.params;
-    console.log('USER ID PARAMS:', userId, 'USER REQ:', req.user);
     if(req.user.id === userId*1) {
       const orders = await getOrdersByUser({id: userId});
       res.send(orders);

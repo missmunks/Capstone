@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import {
   getSomething,
@@ -63,7 +62,6 @@ const App = () => {
 			const queriedOrders = await getOrdersByUser(user, token);
 			if(queriedOrders){
 				queriedOrders.forEach(async order => {
-					const prodName = [];
 					for(let i = 0; i< order.products.length; i++){
 						const curr = order.products[i];
 						const currId = await getProductById(curr.productId);
@@ -85,7 +83,6 @@ const App = () => {
 			}
 			const queriedCart = await getCart(token);
 			if(queriedCart){
-				const prodNames = [];
 				for(let i = 0; i < queriedCart.products.length; i++){
 					const curr = queriedCart.products[i];
 					const currId = await getProductById(curr.productId);
@@ -111,7 +108,7 @@ const App = () => {
 		fetchAndSetProducts();
 		fetchAndSetOrders(user, token);
 		fetchAndSetCart(token);
-  }, [token]);
+  }, [token, user]);
 
   return <>
     <Header token={token} setToken={setToken} user={user} setUser={setUser}/>

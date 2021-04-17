@@ -14,23 +14,18 @@ const style = {
     width: "100%",
 };
 
-const phantom = {
-    display: 'block',
-    padding: '20px',
-    height: '60px',
-    width: '100%',
-  }
+
 
 function Footer({ children }) {
     return <>
             <hr/>
-            <div style={phantom} style={style}>
+            <div style={style}>
                 { children }
                 <p className="copyright">© 1796-3005, WE HAVE THINGS, Inc. or its affiliates</p>
-			    <a href='https://www.facebook.com/marketplace/?ref=app_tab'><img className="socials" src={fb}/></a>
-                <a href='https://twitter.com/?lang=en'><img className="socials" src={twitter}/></a>
-                <a href='https://www.instagram.com/explore/tags/things/'><img className="socials" src={insta}/></a>
-                <a href='https://youtu.be/9C_HReR_McQ'><img className="socials" src={youtube}/></a>
+			    <a href='https://www.facebook.com/marketplace/?ref=app_tab'><img alt='' className="socials" src={fb}/></a>
+                <a href='https://twitter.com/?lang=en'><img alt='' className="socials" src={twitter}/></a>
+                <a href='https://www.instagram.com/explore/tags/things/'><img alt='' className="socials" src={insta}/></a>
+                <a href='https://youtu.be/9C_HReR_McQ'><img alt='' className="socials" src={youtube}/></a>
             </div>
     </>
 }

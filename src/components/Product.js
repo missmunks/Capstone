@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link, useHistory, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import { getProductById, createOrder, addToCart } from '../api/index.js';
 
 const Product = ({ product, cart, setCart, token}) => {
@@ -30,15 +30,12 @@ const Product = ({ product, cart, setCart, token}) => {
 	const handleAddToCart = async () => {
 		try{
 			if (cart.id){
-				console.log('THERE IS A CART IN STATE, the current product and cart need to be passed into addToCart()');
 				//call addOrderToCart route
 				addToCart(cart.id, singleProduct, token);
 			}
 			else {
-				console.log('THERE IS NO CART IN STATE, the current product and cart need to be passed into addToCart()');
 				//create an order with the status "created" and then call addOrderToCart
 				const newCart = await createOrder(token);
-				console.log('the new cart', newCart);
 				addToCart(newCart.id, singleProduct, token);
 			}
 		}

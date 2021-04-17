@@ -74,7 +74,6 @@ ordersRouter.post('/', requireUser, async(req, res, next) => {
 ordersRouter.post('/:orderId/products', requireUser, async(req, res, next) => {
 	const { orderId } = req.params;
   const {productId, price, quantity} = req.body;
-  console.log('req.body', req.body);
   const user = req.user;
 	try{
 		const order = await getOrderById(orderId*1);

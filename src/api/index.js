@@ -144,8 +144,9 @@ export async function cancelOrder(order, token) {
 			headers: {
 				Authorization : `Bearer ${token}`
 			}
-		// data = null;
+		
 		});
+		return data;
 	  }catch(error) {
 		throw error;
 	}
@@ -153,17 +154,17 @@ export async function cancelOrder(order, token) {
 
 export async function completeOrder(order, token, orderId) {
 
-try{
-const {data} = await axios.patch(`api/orders/${order}`, {status : 'completed'}, {
-	headers: {
-		Authorization : `Bearer ${token}`
-	},	
+	try{
+		const {data} = await axios.patch(`api/orders/${order}`, {status : 'completed'}, {
+			headers: {
+				Authorization : `Bearer ${token}`
+			},	
 
-})
-
-}catch(error) {
-throw error;
-}
+		})
+		return data;
+	}catch(error) {
+		throw error;
+	}
 }
 
 

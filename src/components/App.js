@@ -21,6 +21,7 @@ import{
 	Order,
 	Orders,
 	Cart,
+	Success,
 } from './';
 
 const App = () => {
@@ -145,9 +146,13 @@ const App = () => {
 			<Route exact path ='/orders/:orderId'>
 				<Order token = {token} setCart= {setCart} />
 			</Route>
-
+			
 			<Route exact path ='/cart'>
 				<Cart cart={cart} setCart={setCart} token={token} fetchAndSetCart={fetchAndSetCart}/>
+			</Route>
+			
+			<Route exact path ='/success'>
+				<Success />
 			</Route>
     </div>
 

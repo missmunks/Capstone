@@ -55,7 +55,7 @@ const Register = ({setUser, setToken}) => {
 				<br />
 				<input type='text' value={imageURL} onChange={(ev) => setImageURL(ev.target.value)} placeholder="image url"></input>
 				<br />
-				<button type="submit">Login</button>
+				<button type="submit">Register</button>
 			</form>
 			<Link to='/login'>have an account? login here!</Link>
 		</div>

@@ -6,6 +6,7 @@ const productsRouter = require('./productsRouter.js');
 const usersRouter = require('./usersRouter.js');
 const ordersRouter = require('./ordersRouter.js');
 const orderProductsRouter = require('./orderProductsRouter.js');
+const stripeRouter = require('./stripeRouter.js');
 const { getUserByUsername } = require('../db/users');
 
 
@@ -47,6 +48,8 @@ apiRouter.use("/users", usersRouter);
 apiRouter.use("/orders", ordersRouter);
 
 apiRouter.use("/order_products", orderProductsRouter);
+
+apiRouter.use("/stripe", stripeRouter);
 
 apiRouter.get((req, res, next) => {
   res.status(404).send(error)

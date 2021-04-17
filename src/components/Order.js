@@ -34,15 +34,15 @@ const Order = ({order, type, token, setCart, cart, fetchAndSetCart}) => {
 		} 
 	}
     
-	
-
 	const handleProductRemove = async (id) => {
 		const removed = await removeFromCart(id);
 		await fetchAndSetCart(token);
 	};
+	
 	useEffect(()=>{
-		if(type==='cart'){fetchAndSetCart(token);
-	}} , []);
+		if(type==='cart'){fetchAndSetCart(token);}
+	} , []);
+	
 	return <div>
 	
 		<div className='single-order'>

@@ -1,24 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {Link, useHistory, useParams} from 'react-router-dom';
-import {getOrdersByUser} from '../api';
 import {Order} from './';
 
-const Orders = ({orders, setOrders, token, user, setCart}) => {
+const Orders = ({orders, token, user, setCart}) => {
 
 	const userId = user.id;
-	const fetchAndSetOrders = async (user, token) => {
-		try{
-			const queriedOrders = await getOrdersByUser(user, token);
-			setOrders(queriedOrders);
-		}
-		catch(error){
-			console.log(error);
-		}
-	};
-	
-	useEffect(()=>{
-		fetchAndSetOrders(user, token);
-	} , [user]);
 	
 	return <>
 		<div className='orders-list'>

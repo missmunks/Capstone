@@ -7,6 +7,7 @@ import {
   getAllProducts,
   getCart,
   getProductById,
+  getOrdersByUser,
 } from '../api';
 
 import{
@@ -56,6 +57,27 @@ const App = () => {
     	console.log(error)
     }
 	};
+	
+	const fetchAndSetOrders = async (user, token) => {
+		try{
+			const queriedOrders = await getOrdersByUser(user, token);
+			if(queriedOrders){
+				queriedOrders.forEach(async order => {
+					const prodName = [];
+					for(let i = 0; i< order.products.length; i++){
+						const curr = order.products[i];
+						const currId = await getProductById(curr.productId);
+						curr.name = currId.name;
+					};
+				});
+				setOrders(queriedOrders);
+			}
+		}
+		catch(error){
+			console.log(error);
+		}
+	};
+	
 	const fetchAndSetCart = async (token) => {
 		try{
 			if (!token){
@@ -66,11 +88,8 @@ const App = () => {
 				const prodNames = [];
 				for(let i = 0; i < queriedCart.products.length; i++){
 					const curr = queriedCart.products[i];
-					console.log(curr);
 					const currId = await getProductById(curr.productId);
-					console.log(currId);
 					curr.name = currId.name;
-					console.log(curr);
 				};
 				setCart(queriedCart);
 			}
@@ -90,6 +109,7 @@ const App = () => {
         setMessage(error.message);
       });
 		fetchAndSetProducts();
+		fetchAndSetOrders(user, token);
 		fetchAndSetCart(token);
   }, [token]);
 

@@ -1,11 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {Link, useHistory, useParams} from 'react-router-dom';
+import React, {useState} from 'react';
 import {Order} from './';
 
 const Orders = ({orders, token, user, setCart}) => {
 	const [showOrders, setShowOrders] = useState(false);
 	const handleShow = () => {setShowOrders(!showOrders)};
-	const userId = user.id;
 	
 	return <>
 		<div className='orders-list'>

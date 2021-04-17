@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link, useHistory, useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import { getProductById, createOrder, addToCart } from '../api/index.js';
 
 const Product = ({ product, cart, setCart, token}) => {

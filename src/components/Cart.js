@@ -1,7 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import React from 'react';
 import {Order} from './';
-import { getCart } from '../api';
 
 
 

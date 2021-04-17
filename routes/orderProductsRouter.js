@@ -6,7 +6,6 @@ const orderProductsRouter = express.Router();
 orderProductsRouter.patch('/:orderProductId', async(req, res, next) => {
     const {price, quantity} = req.body;
     const {orderProductId} = req.params;
-    console.log('updating order_product');
     try{
         const order_product = await updateOrderProduct({id: orderProductId, price: price, quantity: quantity});
         res.send(order_product);
@@ -20,7 +19,6 @@ orderProductsRouter.delete('/:orderProductId', async(req, res, next) => {
     try{
         const {orderProductId} = req.params;
         const order_product = await destroyOrderProduct(orderProductId);
-        console.log('deleting order_product');
         res.send({message: 'deleted', order_product});
     }catch(error){
         next(error);

@@ -267,7 +267,6 @@ const createOrder = async ({userId, status}) => {
 		VALUES ($1, $2)
 		RETURNING *;
 		`, [userId, status]);
-		console.log('order: ', order);
 		return order;
 	}catch(error){
 		throw error;
@@ -283,31 +282,28 @@ const createInitialOrders = async () => {
 				userId: 2
 			},
 			{
-				status: 'placed',
+				status: 'cancelled',
 				userId: 3
 			},
 			{
-				status: 'submitted',
+				status: 'cancelled',
 				userId: 1
 			}
 		];
 		
 		const orders = await Promise.all(ordersToCreate.map(createOrder));
-		console.log('test orders: ', orders);
 	}catch(error){
 		throw error;
 	}
 };
 
 const createOrderProduct = async ({productId, orderId, price, quantity}) => {
-	console.log('creating order_products...');
 	try{
 		const {rows: [order_product]} = await client.query(`
 		INSERT INTO order_products("productId", "orderId", price, quantity)
 		VALUES ($1, $2, $3, $4)
 		RETURNING *;
 		`, [productId, orderId, price, quantity]);
-		console.log('order_product: ', order_product);
 		return order_product;
 	}catch(error){
 		throw error;

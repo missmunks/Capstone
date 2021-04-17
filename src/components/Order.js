@@ -38,7 +38,7 @@ const Order = ({order, type, token, setCart, cart, fetchAndSetCart}) => {
 	
 	useEffect(()=>{
 		if(type==='cart'){fetchAndSetCart(token);}
-	} , [token, fetchAndSetCart, type]);
+	} , []);
 	
 	return <div>
 	

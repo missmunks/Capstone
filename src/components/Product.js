@@ -5,7 +5,7 @@ import { getProductById, createOrder, addToCart } from '../api/index.js';
 const Product = ({ product, cart, setCart, token}) => {
 	const {id} = useParams();
 	const [singleProduct, setSingleProduct ] = useState(product ? product : {});
-
+console.log(singleProduct);
 	const getProduct = async (id) => {
 		try{
 			const theProduct = await getProductById(id);
@@ -62,9 +62,11 @@ const Product = ({ product, cart, setCart, token}) => {
 	return <div key={id}>
 				<h3 className='products-list-name'>{singleProduct.name}</h3>
 				<ul>
+					<li><img src="/placeholder.jpg" width="200px" /></li>
 					<li>description: {singleProduct.description}</li>
 					<li>in stock? {singleProduct.inStock ? 'yes' : 'no' }</li>
 					<li>price: ${singleProduct.price}</li>
+					<button type='addToCart' onClick={handleAddToCart}>Add to Cart</button>
 				</ul>
 			</div>
 	}

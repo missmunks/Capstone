@@ -13,8 +13,8 @@ const Home = ({user}) => {
                 <h2 type='homeText'>Matt has things, Jess has things, Joseph has things, Sav has things...</h2>
                 <h3>don't be left out. Get some things.</h3>
                 <Link className='productsHomeLink' to='/products'>show me all the things</Link>
-                <h2>need to sign up?</h2>
-                <Link className='loginHomeLink' to='/login'>let's login</Link>
+                
+                <Link className='loginHomeLink' to='/login'>login/register</Link>
             </div>
 
 }

@@ -18,8 +18,8 @@ stripeRouter.post('/create-checkout-session', async (req, res) => {
       },
     ],
     mode: 'payment',
-    success_url: 'http://localhost:3000/success',
-    cancel_url: 'https://example.com/cancel',
+    success_url: 'https://tech-titans-shop.herokuapp.com/success',
+    cancel_url: 'https://tech-titans-shop.herokuapp.com/cart',
   });
   
   res.json({id: session.id});

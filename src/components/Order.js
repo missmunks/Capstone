@@ -27,6 +27,7 @@ const Order = ({order, type, token, setCart, cart, fetchAndSetCart}) => {
 		else{
 			try{
 				await completeOrder(order.id, token)
+				alert("send check or money order to 866 Wallaby Way, Sydney")
 				setCart(resetCartObj)
 			}catch(error){
 				throw error;

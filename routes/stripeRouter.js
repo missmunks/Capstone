@@ -12,7 +12,7 @@ stripeRouter.post('/create-checkout-session', async (req, res) => {
           product_data: {
             name: 'Order total',
           },
-          unit_amount: 200000,
+          unit_amount: 20000000,
         },
         quantity: 1,
       },

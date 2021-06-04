@@ -73,7 +73,7 @@ const getAllProducts = async () => {
     }
 };
 
-const getProductById = async ({id}) => {
+ const getProductById = async ({id}) => {
     try{
         const {rows: [products]} = await client.query(`
         SELECT *
@@ -89,5 +89,5 @@ module.exports = {
 	createProduct,
 	createInitialProducts,
 	getAllProducts,
-	getProductById,
+	getProductById
 }

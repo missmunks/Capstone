@@ -27,7 +27,7 @@ const getUser = async ({username, password}) => {
 		      const hashedPassword = user.password;
 		      const passwordsMatch = await bcrypt.compare(password, hashedPassword);
 		      if (passwordsMatch){
-		          const returnObj = { username: user.username, id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, imageURL: user.imageURL };
+		          const returnObj = { username: user.username, id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, imageURL: user.imageURL, isAdmin: user.isAdmin };
 		          return returnObj;
 		      } 
       	}

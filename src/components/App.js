@@ -22,6 +22,7 @@ import{
 	Orders,
 	Cart,
 	Success,
+	Logout
 } from './';
 
 const App = () => {
@@ -133,6 +134,10 @@ const App = () => {
 
 			<Route exact path='/login'>
 				<Login setToken={setToken} setUser={setUser}/>
+			</Route>
+
+			<Route exact path='/logout'>
+				<Logout setToken={setToken} setUser={setUser} />
 			</Route>
 
 			<Route exact path ='/myaccount'>

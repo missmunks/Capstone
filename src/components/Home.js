@@ -10,7 +10,6 @@ const Home = ({user}) => {
                 <hr className='homepageHR'/>
                 <img alt='' className="homePhoto" src={home}/>
                 <hr className='homepageHR'/>
-                <h2 type='homeText'>Matt has things, Jess has things, Joseph has things, Sav has things...</h2>
                 <h3>don't be left out. Get some things.</h3>
                 <Link className='productsHomeLink' to='/products'>show me all the things</Link>
                 

@@ -2,7 +2,9 @@ import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 
-const Nav = ({ token, setToken, setUser }) => {
+const Nav = ({ token, setToken, setUser, user }) => {
+	console.log(user, 'this is the current user')
+	console.log(user.isAdmin, 'this is the admin property')
 	const history = useHistory();
     return <>
     	<nav className='navLinks'>

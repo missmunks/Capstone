@@ -84,6 +84,7 @@ usersRouter.post('/login', async(req, res, next) => {
         } else {
             throw new Error ('Username or password is incorrect')
         }
+        console.log(token)
     } catch (error) {
         next(error)
     }

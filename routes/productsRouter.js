@@ -1,6 +1,7 @@
 const express = require('express');
 const { createProduct } = require('../db');
-const { getAllProducts, getProductById, destroyProduct, updateProduct } = require('../db/products');
+const { getAllProducts, getProductById, destroyProduct, updateProduct} = require('../db/products');
+const {getOrdersByProduct} = require('../db/orders')
 const ordersRouter = require('./ordersRouter');
 const productsRouter = express.Router();
 const {requireUser, requireAdmin } = require('./utils')
@@ -111,6 +112,18 @@ productsRouter.patch('/:productId', requireAdmin, async(req, res, next) => {
         
     } catch (error) {
         next(error)
+    }
+});
+
+productsRouter.get('/:productId/orders', requireAdmin, async (req, res, next) => {
+    const {orderId} = req.params;
+
+    try {
+        const products = await getOrdersByProduct(orderId);
+
+        res.send(products);
+    } catch (error) {
+        next(error);
     }
 })
 

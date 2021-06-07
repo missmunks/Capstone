@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Order} from './';
 
-const Orders = ({orders, token, user, setCart}) => {
+const Orders = ({orders, token, setCart}) => {
 	const [showOrders, setShowOrders] = useState(false);
 	const handleShow = () => {setShowOrders(!showOrders)};
 	

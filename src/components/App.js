@@ -22,12 +22,15 @@ import{
 	Orders,
 	Cart,
 	Success,
-	Logout
+	Logout,
+	Users,
+	AdminAllOrders
 } from './';
 
 const App = () => {
   const [message, setMessage] = useState('');
   const [products, setProducts] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
 	const [token, setToken] = useState( () => {
 		if (localStorage.getItem('token')) {
 			return localStorage.getItem('token')
@@ -45,8 +48,9 @@ const App = () => {
 			return {};
 		}
 	});
-	const [orders, setOrders] = useState([]);
 
+	const [orders, setOrders] = useState([]);
+	const [singleUser, setSingleUser] = useState([]);
 	const [cart, setCart] = useState({products: []});
 
 	const fetchAndSetProducts = async () => {
@@ -158,6 +162,17 @@ const App = () => {
 			
 			<Route exact path ='/success'>
 				<Success />
+			</Route>
+
+			<Route path = '/users'>
+				<Users  user={user} setSingleUser={setSingleUser}  allUsers={allUsers} setAllUsers={setAllUsers} token={token} />
+			</Route>
+
+			
+            
+
+			<Route exact path= '/AdminAllOrders' >
+				<AdminAllOrders  />
 			</Route>
     </div>
 

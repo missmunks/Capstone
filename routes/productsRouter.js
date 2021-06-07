@@ -13,7 +13,7 @@ productsRouter.get('/', async(req, res, next) => {
         res.send(allProducts)
     } catch (error) {
         next(error)
-    }
+    } 
 });
 
 productsRouter.get('/:id', async(req, res, next) => {

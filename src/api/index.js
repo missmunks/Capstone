@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 export async function getSomething() {
   try {
     const { data } = await axios.get('/api');
@@ -87,6 +88,21 @@ export async function getOrdersByUser(user, token) {
 		return data
 	}
 	catch(error){
+		throw error;
+	}
+}
+
+
+// this may not function!!!!!!!!!!!!!
+export async function getAllUsers(token) {
+	try{ 
+		const{data} = await axios.get(`/api/users`, {
+			headers: {
+				Authorization : `Bearer ${token}`
+			}
+		});
+		return data
+	}catch(error) {
 		throw error;
 	}
 }

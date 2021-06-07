@@ -69,7 +69,8 @@ async function buildTables() {
 	}
 };
 
-const createProduct = async ({name, 
+const createProduct = async ({
+	name, 
 	description, 
 	price, 
 	imageUrl, 

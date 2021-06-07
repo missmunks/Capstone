@@ -19,7 +19,7 @@ const { response } = require('express');
 const { getOrdersByUser} = require('../db/orders')
 
 
-usersRouter.get('/', requireUser, requireAdmin, async (req, res, next) => {
+usersRouter.get('/', requireAdmin, async (req, res, next) => {
 	const users = await getAllUsers();
 	res.send(users);
 });
@@ -84,7 +84,7 @@ usersRouter.post('/login', async(req, res, next) => {
         } else {
             throw new Error ('Username or password is incorrect')
         }
-        console.log(token)
+      
     } catch (error) {
         next(error)
     }

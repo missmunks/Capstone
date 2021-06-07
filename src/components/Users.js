@@ -38,14 +38,21 @@ const Users = ({user, allUsers, setAllUsers,  token, setSingleUser }) => {
             <div className='allUsers'>
 
                 {allUsers.map(_user => {
-                    const {id, username, isAdmin} = _user;
+                    const {id, username, isAdmin, email, firstName, lastName, imageURL} = _user;
 
                     return (<div className='single-user' key={id}>
                         <div> 
                         <br />
                         <Link to={`/users/${id}`}><h3 onClick={() => setSingleUser(user)}>{username}</h3></Link>
                         <div>User ID: {id}</div>
+                        <div>email {email}</div>
+                        <div>Name: {firstName} {lastName}</div>
+                        <div>
+                            <h1>Profile Picture:</h1>
+                            <img src={imageURL} />
+                            </div>
                         <div>isAdmin? {isAdmin ? 'Yes' : 'No'}</div>
+                       
                         </div>
                     </div>)
                 })}

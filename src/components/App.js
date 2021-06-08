@@ -24,7 +24,8 @@ import{
 	Success,
 	Logout,
 	Users,
-	AdminAllOrders
+	AdminAllOrders,
+	AdminSingleUser
 } from './';
 
 const App = () => {
@@ -166,6 +167,10 @@ const App = () => {
 
 			<Route path = '/users'>
 				<Users  user={user} setSingleUser={setSingleUser}  allUsers={allUsers} setAllUsers={setAllUsers} token={token} />
+			</Route>
+
+			<Route exact Path = '/users/:userId' >
+				<AdminSingleUser  user={user} allUsers={allUsers} />
 			</Route>
 
 			

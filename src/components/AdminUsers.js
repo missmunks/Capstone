@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-const Users = ({user, allUsers, setAllUsers,  token, setSingleUser }) => {
+const Users = ({user, allUsers, setAllUsers,  token, setSingleUser, event }) => {
 
     console.log(user, 'this is the user I am passing in to the users component')
     console.log(token, 'this is the token I am passing in to the users component')
@@ -23,14 +23,21 @@ const Users = ({user, allUsers, setAllUsers,  token, setSingleUser }) => {
         } catch (error) {
           console.error(error);
         }
-      }
+   }  
       
       useEffect( () => {
           fetchUsers()
       }, [])
 
 
+        
+
             console.log(allUsers, 'this is all users')
+
+            const handleClick = (id) => {
+              
+                return <h1>Handle Click</h1>
+                }
 
       if (user.isAdmin) {
         return (<>
@@ -39,7 +46,7 @@ const Users = ({user, allUsers, setAllUsers,  token, setSingleUser }) => {
 
                 {allUsers.map(_user => {
                     const {id, username, isAdmin, email, firstName, lastName, imageURL} = _user;
-
+                    console.log(id)
                     return (<div className='single-user' key={id}>
                         <div> 
                         <br />
@@ -54,6 +61,7 @@ const Users = ({user, allUsers, setAllUsers,  token, setSingleUser }) => {
                         <div>isAdmin? {isAdmin ? 'Yes' : 'No'}</div>
                        
                         </div>
+                        <button onClick={() => {handleClick(id)}}>THIS IS AN UPDATE BUTTON</button>
                     </div>)
                 })}
             </div>
@@ -65,7 +73,7 @@ const Users = ({user, allUsers, setAllUsers,  token, setSingleUser }) => {
         return <Redirect to='/' />
     }
 
-   
+
 }
 
 export default Users;

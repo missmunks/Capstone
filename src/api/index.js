@@ -93,7 +93,7 @@ export async function getOrdersByUser(user, token) {
 }
 
 
-// this may not function!!!!!!!!!!!!!
+// ADMIN  this may not function!!!!!!!!!!!!!
 export async function getAllUsers(token) {
 	try{ 
 		const{data} = await axios.get(`/api/users`, {
@@ -102,6 +102,21 @@ export async function getAllUsers(token) {
 			}
 		});
 		return data
+	}catch(error) {
+		throw error;
+	}
+}
+
+
+// ADMIN function untested 
+export async function getSingleUser(token, userId) {
+	try {
+		 const{data} = await axios.get(`/api/users/:userId`, {
+			 headers: {
+				 Authorization : `Bearer ${token}`
+			 }
+		 })
+		 return data;
 	}catch(error) {
 		throw error;
 	}

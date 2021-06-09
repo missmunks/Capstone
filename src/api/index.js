@@ -92,6 +92,20 @@ export async function getOrdersByUser(user, token) {
 	}
 }
 
+export async function getAllOrders(token) {
+	try {
+		const {data} = await axios.get(`/api/orders`, {
+			headers: {
+				Authorization : `Bearer ${token}`
+			}
+		});
+		return data
+	}
+	catch(error){
+		throw error;
+	}
+}
+
 
 // ADMIN  this may not function!!!!!!!!!!!!!
 export async function getAllUsers(token) {
@@ -207,3 +221,20 @@ export async function removeFromCart(orderProductId){
 		throw error;
 	}
 }
+
+export async function getUsers(token) {
+        try {
+          const {data} = await axios.get(`/api/users`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+          });
+          
+          
+          return data
+    
+        } catch (error) {
+          console.error(error);
+        }
+   }  
+

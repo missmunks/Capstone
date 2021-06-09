@@ -7,6 +7,8 @@ import {
   getCart,
   getProductById,
   getOrdersByUser,
+  getUsers,
+  getAllOrders
 } from '../api';
 
 import{
@@ -23,9 +25,10 @@ import{
 	Cart,
 	Success,
 	Logout,
-	Users,
+	AdminUsers,
 	AdminAllOrders,
-	AdminSingleUser
+	AdminSingleUser,
+	AdminAddUser
 } from './';
 
 const App = () => {
@@ -165,19 +168,20 @@ const App = () => {
 				<Success />
 			</Route>
 
-			<Route path = '/users'>
-				<Users  user={user} setSingleUser={setSingleUser}  allUsers={allUsers} setAllUsers={setAllUsers} token={token} />
+			<Route exact path = '/users'>
+				<AdminUsers  user={user} setSingleUser={setSingleUser}  allUsers={allUsers} setAllUsers={setAllUsers} token={token} />
 			</Route>
 
-			<Route exact Path = '/users/:userId' >
-				<AdminSingleUser  user={user} allUsers={allUsers} />
+			<Route exact path = '/users/:userId' >
+				<AdminSingleUser user={user} singleUser={singleUser} setSingleUser={setSingleUser} />
 			</Route>
 
-			
-            
+			<Route exact path = '/users/add' >
+				<AdminAddUser user={user} getUsers={getUsers} />
+			</Route>
 
 			<Route exact path= '/AdminAllOrders' >
-				<AdminAllOrders  />
+				<AdminAllOrders  user={user} orders={orders} getAllOrders = {getAllOrders} />
 			</Route>
     </div>
 

@@ -1,41 +1,100 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import {Redirect} from 'react-router-dom';
 
-
-const AdminSingleUser = ({user, allUsers}) => {
-
-    console.log(allUsers, 'aaaaaaaaaaaaaall users')
+const AdminSingleUser = ({token, user, singleUser, setSingleUser, getUsers}) => {
+    console.log(singleUser, "ssssssssssssssingle user")
+    const {id, username, isAdmin, firstName, lastName, email, address, city, state, zip} = singleUser;
     
-    const {id,
-        firstName, 
-        lastName,
-        email, 
-        imageURL,
-        username,
-        password, 
-        isAdmin} = user;
+    const [userToEdit, setUserToEdit] = useState(false);
 
-    console.log(user, "this is a single user")
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-        // const findUser = async(userId) => {
-        //     allUsers.map(aUser => {
-        //         if(aUser.id === userId) {
-        //             return <h1>The map is working</h1>
-        //         }
-        //     })
-        // }
+        const response = await fetch(`/api/users/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'Application/json',
+                'Authorization': `Bearer ${token}`
+            }, 
+            body: JSON.stringify(singleUser)
+        })
+        const data = await response.json();
 
-        // const handleClick = (event) => {
-        //     event.preventDefault();
-        //     findUser(event.target.id);
-        //     return <h1>Handle Click</h1>
-        //     }
-  
+        setUserToEdit(!userToEdit);
+        getUsers();
+    }
 
+    const handleOnChange = async (event) => {
+        if (event.target.name === 'isAdmin') {
+            setSingleUser({...singleUser, [event.target.name]: !isAdmin});
+        } else {
+            setSingleUser({...singleUser, [event.target.name]: event.target.value});
+        }
+    }
 
-    return <>
-            {/* <button onClick = {handleClick} >Update User</button> */}
-    </>
-};
-
+    if (user.isAdmin === true) {
+        return (<div className='single-user-detail'>
+                {userToEdit ?
+                <>
+                <h3>Editing {username}</h3>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <div>Username</div>
+                        <input required type='text' name='username' minLength='3' maxLength='20' value={username} onChange={handleOnChange}></input>
+                    </div>
+                    <div>
+                        <div>isAdmin? <input type='checkbox' name='isAdmin' checked={!isAdmin ? false : true} value={isAdmin} onChange={handleOnChange}></input></div>
+                    </div>
+                    <div>
+                        <div>First Name</div>
+                        <input required type='text' name='firstName' value={firstName} onChange={handleOnChange}></input>
+                    </div>
+                    <div>
+                        <div>Last Name</div>
+                        <input required type='text' name='lastName' value={lastName} onChange={handleOnChange}></input>
+                    </div>
+                    <div>
+                        <div>Email</div>
+                        <input required type='email' name='email' value={email} onChange={handleOnChange}></input>
+                    </div>
+                    <div>
+                        <div>Address</div>
+                        <input required type='text' name='address' value={address} onChange={handleOnChange}></input>
+                    </div>
+                    <div>
+                        <div>City</div>
+                        <input required type='text' name='city' value={city} onChange={handleOnChange}></input>
+                    </div>
+                    <div>
+                        <div>State</div>
+                        {/* <select required name='state' selected={state} value={state} onChange={handleOnChange}>
+                            {states.map((state, index) => {
+                                return <option key={index}>{`${state.value}`}</option>
+                            })}
+                        </select> */}
+                    </div>
+                    <div>
+                        <div>Zip Code</div>
+                        <input required type='number' name='zip' minLength='5' maxLength='5' value={zip} onChange={handleOnChange}></input>
+                    </div>
+                    <button type='submit' className='btn'>Save User</button>
+                </form>
+                </>
+                :
+                <>
+                <h3>{username}</h3>
+                <div>User ID: {id}</div>
+                <div>isAdmin? {isAdmin ? 'Yes' : 'No'}</div>
+                <div>Name: {firstName} {lastName}</div>
+                <div>Email: {email}</div>
+                <div>Address: {address} {city}, {state} {zip}</div>
+                <button className='btn' onClick={() => setUserToEdit(!userToEdit)}>Edit User</button>
+                </>
+            }
+        </div>)
+    } else {
+        return <Redirect to='/' />
+    }
+}
 
 export default AdminSingleUser;

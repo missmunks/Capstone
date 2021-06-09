@@ -13,6 +13,7 @@ export {default as Order} from './Order';
 export {default as Cart} from './Cart';
 export {default as Success} from './Success';
 export {default as Logout} from './Logout';
-export {default as Users} from './AdminUsers';
+export {default as AdminUsers} from './AdminUsers';
 export {default as AdminAllOrders} from './AdminAllOrders';
-export {default as AdminSingleUser} from './AdminSingleUser'
+export {default as AdminSingleUser} from './AdminSingleUser';
+export {default as AdminAddUser} from './AdminAddUser';

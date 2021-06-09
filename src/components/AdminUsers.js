@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-const Users = ({user, allUsers, setAllUsers,  token, setSingleUser, event }) => {
+const AdminUsers = ({user, allUsers, setAllUsers,  token, setSingleUser }) => {
 
     console.log(user, 'this is the user I am passing in to the users component')
     console.log(token, 'this is the token I am passing in to the users component')
@@ -18,6 +18,7 @@ const Users = ({user, allUsers, setAllUsers,  token, setSingleUser, event }) => 
           const data = await response.json();
           console.log(data, 'this is the date from the fetchUsers call')
           setAllUsers(data);
+          
           return allUsers
     
         } catch (error) {
@@ -44,13 +45,13 @@ const Users = ({user, allUsers, setAllUsers,  token, setSingleUser, event }) => 
          
             <div className='allUsers'>
 
-                {allUsers.map(_user => {
-                    const {id, username, isAdmin, email, firstName, lastName, imageURL} = _user;
+                {allUsers.map(aUser => {
+                    const {id, username, isAdmin, email, firstName, lastName, imageURL} = aUser;
                     console.log(id)
-                    return (<div className='single-user' key={id}>
+                    return (<div className='single-user' key={id} >
                         <div> 
                         <br />
-                        <Link to={`/users/${id}`}><h3 onClick={() => setSingleUser(user)}>{username}</h3></Link>
+                        <Link to={`/users/${id}`}><h3 onClick={() => setSingleUser(aUser)}>{username}</h3></Link>
                         <div>User ID: {id}</div>
                         <div>email {email}</div>
                         <div>Name: {firstName} {lastName}</div>
@@ -66,7 +67,7 @@ const Users = ({user, allUsers, setAllUsers,  token, setSingleUser, event }) => 
                 })}
             </div>
            
-            <Link to='/users/add'><button className="btn">Add A New User</button></Link>
+            <Link to='/users/add'><button>Add A New User</button></Link>
             
         </>)
     } else {
@@ -76,4 +77,4 @@ const Users = ({user, allUsers, setAllUsers,  token, setSingleUser, event }) => 
 
 }
 
-export default Users;
+export default AdminUsers;

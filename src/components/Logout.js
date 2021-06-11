@@ -1,21 +1,24 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 
 
 const Logout = ({setToken, setUser}) => {
     const history = useHistory();
-return <>
-<button onClick = {
-    () => {
+
+    const eraseToken = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setToken('')
         setUser({});
         history.push('/');
     }
-}>
-Logout</button>
-</>
+
+    eraseToken();
+
+    return <Redirect to='/' />
+
 }
+
+
 
 export default Logout;

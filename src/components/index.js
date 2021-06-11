@@ -17,3 +17,5 @@ export {default as AdminUsers} from './AdminUsers';
 export {default as AdminAllOrders} from './AdminAllOrders';
 export {default as AdminSingleUser} from './AdminSingleUser';
 export {default as AdminAddUser} from './AdminAddUser';
+export {default as AdminAddProduct} from './AdminAddProduct';
+export {default as AdminEditProduct} from './AdminEditProduct';

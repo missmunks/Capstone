@@ -44,6 +44,9 @@ async function buildTables() {
 		      username VARCHAR(255) UNIQUE NOT NULL,
 		      password VARCHAR(255) UNIQUE NOT NULL,
 		      "isAdmin" BOOLEAN DEFAULT false
+			  address VARCHAR(255)
+			  city VARCHAR(255)
+			  zip VARCHAR(255)
 		    )
 		`);
 	await client.query(`

@@ -222,6 +222,15 @@ export async function removeFromCart(orderProductId){
 	}
 }
 
+export async function deleteProduct(productId) {
+	try{
+		const {data} = await axios.delete(`api/products/${productId}`);
+		return data
+	}catch(error){
+		throw error
+	}
+}
+
 export async function getUsers(token) {
         try {
           const {data} = await axios.get(`/api/users`, {
@@ -237,4 +246,6 @@ export async function getUsers(token) {
           console.error(error);
         }
    }  
+
+
 

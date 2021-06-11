@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
 
-
+// I WOULD LIKE TO ADD A USERNAME TO THIS TO SEE WHO MADE THE ORDER, OR TO SORT THEM IN SOME LOGICAL WAY
 const AllOrders = ({user, orders, getAllOrders}) => {
     console.log(orders, 'oooooooooooooooorders')
     useEffect( () => {
@@ -9,8 +9,9 @@ const AllOrders = ({user, orders, getAllOrders}) => {
     }, []);
 
     if (user.isAdmin) {
+        console.log(user, 'this is the orders user')
         return (<div>
-            <h2>Orders History</h2>
+            <h2>Orders Placed</h2>
             <div>
                 {orders.map(order => {
                     const {id, datePlaced, status, products, userId} = order;
@@ -19,7 +20,7 @@ const AllOrders = ({user, orders, getAllOrders}) => {
                         <br />
                         <div>Order ID: {id}</div>
                         <div>Status: {status}</div>
-                        {/* <div>Date Placed: {moment(datePlaced).format("LL")}</div> */}
+                        <div>Date Placed: {datePlaced}</div>
                         <div>User ID: {userId}</div>
 
                         <div className='order-products'>

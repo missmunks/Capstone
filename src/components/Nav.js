@@ -14,19 +14,11 @@ const Nav = ({ token, setToken, setUser, user }) => {
 				{user.isAdmin ? <Link to='/users'>All Users</Link> : ""}
 				{user.isAdmin ? <Link to='/users/add'>Add User</Link> : ""}
 				{user.isAdmin ? <Link to='/AdminAllOrders'>All Orders</Link> : ""}
+				{user.isAdmin ? <Link to= '/AdminAddProduct'>Add Product</Link> : ""}
 				{ token && <Link to='/cart'>My Cart</Link> }
 				{!token && <Link to='/login'>Login/Register</Link>}
 				{ token && <Link to='/myaccount'>My Account</Link>}
-				{ token && <button className="logout" onClick = {
-					() => {
-						localStorage.removeItem('token');
-						localStorage.removeItem('user');
-						setToken('')
-						setUser({});
-						history.push('/');
-					}
-				}>
-				Logout</button>}
+				{token && <Link to='/Logout'>Logout</Link>}
 			</nav>
 		</>
 }

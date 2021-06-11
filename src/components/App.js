@@ -28,13 +28,21 @@ import{
 	AdminUsers,
 	AdminAllOrders,
 	AdminSingleUser,
-	AdminAddUser
+	AdminAddUser,
+	AdminAddProduct,
+	AdminEditProduct
 } from './';
 
 const App = () => {
   const [message, setMessage] = useState('');
   const [products, setProducts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [imageURL, setImageURL]= useState('');
+  const [inStock, setInStock] = useState('');
+  const [category, setCategory]= useState('');
 	const [token, setToken] = useState( () => {
 		if (localStorage.getItem('token')) {
 			return localStorage.getItem('token')
@@ -182,6 +190,14 @@ const App = () => {
 
 			<Route exact path= '/AdminAllOrders' >
 				<AdminAllOrders  user={user} orders={orders} getAllOrders = {getAllOrders} />
+			</Route>
+
+			<Route exact path = '/AdminAddProduct' >
+				<AdminAddProduct token={token} name={name} setName={setName} description={description} setDescription={setDescription} price={price} setPrice={setPrice} imageURL={imageURL} setImageURL={setImageURL} category={category} setCategory={setCategory} inStock={inStock} setInStock={setInStock} />
+			</Route>
+
+			<Route exact path='/AdminEditProduct' >
+				<AdminEditProduct token={token} name={name} setName={setName} description={description} setDescription={setDescription} price={price} setPrice={setPrice} imageURL={imageURL} setImageURL={setImageURL} category={category} setCategory={setCategory} inStock={inStock} setInStock={setInStock} />
 			</Route>
     </div>
 

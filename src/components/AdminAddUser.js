@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Redirect, useHistory} from 'react-router-dom';
 
-const AdminAddUser = ({getUsers, user}) => {
+const AdminAddUser = ({getUsers, user, states}) => {
 
     console.log('fish is yucky')
 
@@ -85,11 +85,11 @@ const AdminAddUser = ({getUsers, user}) => {
                 </div>
                 <div>
                     <div>State</div>
-                    {/* <select required name='state' value={state} onChange={handleOnChange}>
+                    <select required name='state' value={state} onChange={handleOnChange}>
                         {states.map((state, index) => {
                             return <option key={index}>{`${state.value}`}</option>
                         })}
-                    </select> */}
+                    </select>
                 </div>
                 <div>
                     <div>Zip Code</div>

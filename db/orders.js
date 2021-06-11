@@ -73,7 +73,7 @@ const getOrdersByUser = async ({id}) => {
 
 const getOrdersByProduct = async ({ id }) => {
 	try{
-		const {rows: [order]} = await client.query(`
+		const {rows: order} = await client.query(`
 			SELECT orders.id, orders.status, orders."userId", orders."datePlaced"
 			FROM orders
 			JOIN order_products ON order_products."orderId" = orders.id
@@ -85,6 +85,8 @@ const getOrdersByProduct = async ({ id }) => {
 		throw error;
 	}
 };
+
+
 
 const getCartByUser = async ({id}) => {
 	try{

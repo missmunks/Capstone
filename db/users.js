@@ -65,11 +65,55 @@ const getAllUsers = async () => {
     }
 };
 
+const updateUser = async (fields = {}) => { 
+    const {id, password} = fields;
+    const setString = Object.keys(fields).map((key, index) => {
+        if (key === "firstName" || key === "lastName" || key === "isAdmin") {
+            return `"${key}"=$${index + 1}`;
+        } else {
+            return `${key}=$${index + 1}`;
+        }
+    }).join(', ');
+
+    try {
+
+        if (password) {
+            const SALT_COUNT = 10; 
+            const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
+
+            const { rows: [user] } = await client.query(` 
+                UPDATE users
+                SET ${setString}
+                WHERE id = ${id}
+                RETURNING *; 
+            `, Object.values(fields));
+
+            password = hashedPassword
+            delete user.password; 
+            return user;
+        } else {
+            const { rows: [user] } = await client.query(` 
+                UPDATE users
+                SET ${setString}
+                WHERE id = ${id}
+                RETURNING *; 
+            `, Object.values(fields));
+            return user;
+        }
+    } catch (error) {
+        throw error; 
+
+    }
+}
+
+
+
 
 
 module.exports = {
   getUserByUsername,
   getUserById,
   getUser,
-  getAllUsers
+  getAllUsers,
+  updateUser
 }

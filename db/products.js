@@ -85,9 +85,51 @@ const getAllProducts = async () => {
     }
 };
 
+
+
+const destroyProduct = async ({ id }) => {
+    try {
+        const {rows: [product]} = await client.query(`
+        DELETE FROM products
+        WHERE id=$1
+        `, [id])
+    
+   return order
+    } catch (error) {
+        throw error
+    }
+}
+
+const updateProduct = async (fields = {}) => {
+    const {id} = fields;
+
+    const setString = Object.keys(fields).map((key, index) => {
+        if (key === "imageURL" || key === "inStock") {
+            return `"${key}"=$${index + 1}`;
+        } else {
+            return `${key}=$${index + 1}`;
+        }
+    }).join(', ');
+
+    try {
+        const {rows: [product]} = await client.query(`
+            UPDATE products
+            SET ${setString}
+            WHERE id = ${id}
+            RETURNING *;
+        `, Object.values(fields));
+
+        return product;
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = {
 	createProduct,
 	createInitialProducts,
 	getAllProducts,
-	getProductById
+	getProductById,
+	destroyProduct,
+	updateProduct
 }

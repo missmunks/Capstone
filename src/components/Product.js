@@ -53,7 +53,7 @@ console.log(singleProduct);
 				<li>description: {product.description}</li>
 				<li>in stock? {product.inStock ? 'yes' : 'no' }</li>
 				<li>price: ${product.price}</li>
-				<button type='addToCart' onClick={handleAddToCart}>Add to Cart</button>
+				<button  onClick={handleAddToCart}>Add to Cart</button>
 			</ul>
 		</>
 	}else{

@@ -7,6 +7,8 @@ import {
   getCart,
   getProductById,
   getOrdersByUser,
+  getUsers,
+  getAllOrders
 } from '../api';
 
 import{
@@ -22,12 +24,25 @@ import{
 	Orders,
 	Cart,
 	Success,
-	Logout
+	Logout,
+	AdminUsers,
+	AdminAllOrders,
+	AdminSingleUser,
+	AdminAddUser,
+	AdminAddProduct,
+	AdminEditProduct
 } from './';
 
 const App = () => {
   const [message, setMessage] = useState('');
   const [products, setProducts] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [imageURL, setImageURL]= useState('');
+  const [inStock, setInStock] = useState('');
+  const [category, setCategory]= useState('');
 	const [token, setToken] = useState( () => {
 		if (localStorage.getItem('token')) {
 			return localStorage.getItem('token')
@@ -45,9 +60,73 @@ const App = () => {
 			return {};
 		}
 	});
-	const [orders, setOrders] = useState([]);
 
+	const [orders, setOrders] = useState([]);
+	const [singleUser, setSingleUser] = useState([]);
 	const [cart, setCart] = useState({products: []});
+
+	const states = [
+		{ 'label':'Alabama', 'value': 'AL' },
+		{ 'label':'Alaska', 'value': 'AK'},
+		{ 'label':'American Samoa', 'value': 'AS'},
+		{ 'label':'Arizona', 'value': 'AZ'},
+		{ 'label':'Arkansas', 'value': 'AR'},
+		{ 'label':'California', 'value': 'CA'},
+		{ 'label':'Colorado', 'value': 'CO'},
+		{ 'label':'Connecticut', 'value': 'CT'},
+		{ 'label':'Delaware', 'value': 'DE'},
+		{ 'label':'District of Columbia', 'value': 'DC'},
+		{ 'label':'States of Micronesia', 'value': 'FM'},
+		{ 'label':'Florida', 'value': 'FL'},
+		{ 'label':'Georgia', 'value': 'GA'},
+		{ 'label':'Guam', 'value': 'GU'},
+		{ 'label':'Hawaii', 'value': 'HI'},
+		{ 'label':'Idaho', 'value': 'ID'},
+		{ 'label':'Illinois', 'value': 'IL'},
+		{ 'label':'Indiana', 'value': 'IN'},
+		{ 'label':'Iowa', 'value': 'IA'},
+		{ 'label':'Kansas', 'value': 'KS'},
+		{ 'label':'Kentucky', 'value': 'KY'},
+		{ 'label':'Louisiana', 'value': 'LA'},
+		{ 'label':'Maine', 'value': 'ME'},
+		{ 'label':'Marshall Islands', 'value': 'MH'},
+		{ 'label':'Maryland', 'value': 'MD'},
+		{ 'label':'Massachusetts', 'value': 'MA'},
+		{ 'label':'Michigan', 'value': 'MI'},
+		{ 'label':'Minnesota', 'value': 'MN'},
+		{ 'label':'Mississippi', 'value': 'MS'},
+		{ 'label':'Missouri', 'value': 'MO'},
+		{ 'label':'Montana', 'value': 'MT'},
+		{ 'label':'Nebraska', 'value': 'NE'},
+		{ 'label':'Nevada', 'value': 'NV'},
+		{ 'label':'New Hampshire', 'value': 'NH'},
+		{ 'label':'New Jersey', 'value': 'NJ'},
+		{ 'label':'New Mexico', 'value': 'NM'},
+		{ 'label':'New York', 'value': 'NY'},
+		{ 'label':'North Carolina', 'value': 'NC'},
+		{ 'label':'North Dakota', 'value': 'ND'},
+		{ 'label':'Northern Mariana Islands', 'value': 'MP'},
+		{ 'label':'Ohio', 'value': 'OH'},
+		{ 'label':'Oklahoma', 'value': 'OK'},
+		{ 'label':'Oregan', 'value': 'OR'},
+		{ 'label':'Palau', 'value': 'PW'},
+		{ 'label':'Pennsylvania', 'value': 'PA'},
+		{ 'label':'Puerto Rico', 'value': 'PR'},
+		{ 'label':'Rhode Island', 'value': 'RI'},
+		{ 'label':'South Carolina', 'value': 'SC'},
+		{ 'label':'South Dakota', 'value': 'SD'},
+		{ 'label':'Tennessee', 'value': 'TN'},
+		{ 'label':'Texas', 'value': 'TX'},
+		{ 'label':'Utah', 'value': 'UT'},
+		{ 'label':'Vermont', 'value': 'VT'},
+		{ 'label':'Virgin Islands', 'value': 'VI'},
+		{ 'label':'Virginia', 'value': 'VA'},
+		{ 'label':'Washington', 'value': 'WA'},
+		{ 'label':'West Virginia', 'value': 'WV'},
+		{ 'label':'Wisconsin', 'value': 'WI'},
+		{ 'label':'Wyoming', 'value': 'WY'}
+		];
+	
 
 	const fetchAndSetProducts = async () => {
 		try{
@@ -158,6 +237,30 @@ const App = () => {
 			
 			<Route exact path ='/success'>
 				<Success />
+			</Route>
+
+			<Route exact path = '/users'>
+				<AdminUsers  user={user} setSingleUser={setSingleUser}  allUsers={allUsers} setAllUsers={setAllUsers} token={token} />
+			</Route>
+
+			<Route exact path = '/users/:userId' >
+				<AdminSingleUser user={user} singleUser={singleUser} setSingleUser={setSingleUser} />
+			</Route>
+
+			<Route exact path = '/users/add' >
+				<AdminAddUser user={user} getUsers={getUsers} states={states} />
+			</Route>
+
+			<Route exact path= '/AdminAllOrders' >
+				<AdminAllOrders  user={user} orders={orders} getAllOrders = {getAllOrders} />
+			</Route>
+
+			<Route exact path = '/AdminAddProduct' >
+				<AdminAddProduct token={token} name={name} setName={setName} description={description} setDescription={setDescription} price={price} setPrice={setPrice} imageURL={imageURL} setImageURL={setImageURL} category={category} setCategory={setCategory} inStock={inStock} setInStock={setInStock} />
+			</Route>
+
+			<Route exact path='/AdminEditProduct' >
+				<AdminEditProduct token={token} name={name} setName={setName} description={description} setDescription={setDescription} price={price} setPrice={setPrice} imageURL={imageURL} setImageURL={setImageURL} category={category} setCategory={setCategory} inStock={inStock} setInStock={setInStock} />
 			</Route>
     </div>
 

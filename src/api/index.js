@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 export async function getSomething() {
   try {
     const { data } = await axios.get('/api');
@@ -91,6 +92,50 @@ export async function getOrdersByUser(user, token) {
 	}
 }
 
+export async function getAllOrders(token) {
+	try {
+		const {data} = await axios.get(`/api/orders`, {
+			headers: {
+				Authorization : `Bearer ${token}`
+			}
+		});
+		return data
+	}
+	catch(error){
+		throw error;
+	}
+}
+
+
+// ADMIN  this may not function!!!!!!!!!!!!!
+export async function getAllUsers(token) {
+	try{ 
+		const{data} = await axios.get(`/api/users`, {
+			headers: {
+				Authorization : `Bearer ${token}`
+			}
+		});
+		return data
+	}catch(error) {
+		throw error;
+	}
+}
+
+
+// ADMIN function untested 
+export async function getSingleUser(token, userId) {
+	try {
+		 const{data} = await axios.get(`/api/users/:userId`, {
+			 headers: {
+				 Authorization : `Bearer ${token}`
+			 }
+		 })
+		 return data;
+	}catch(error) {
+		throw error;
+	}
+}
+
 export async function getCart(token) {
 	try{
 		const {data} = await axios.get(`api/orders/cart`, {
@@ -176,3 +221,31 @@ export async function removeFromCart(orderProductId){
 		throw error;
 	}
 }
+
+export async function deleteProduct(productId) {
+	try{
+		const {data} = await axios.delete(`api/products/${productId}`);
+		return data
+	}catch(error){
+		throw error
+	}
+}
+
+export async function getUsers(token) {
+        try {
+          const {data} = await axios.get(`/api/users`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+          });
+          
+          
+          return data
+    
+        } catch (error) {
+          console.error(error);
+        }
+   }  
+
+
+

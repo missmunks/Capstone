@@ -8,12 +8,14 @@ const {
 	completeOrder,
 	cancelOrder 
 } = require('../db/orders');
+
 const { 
 	addProductToOrder, 
 	getOrderProductById, 
 	updateOrderProduct, 
 	destroyOrderProduct 
 } = require('../db/orderProducts');
+
 const ordersRouter = express.Router();
 const {createOrder} = require('../db/index')
 const { requireUser, requireAdmin } = require('./utils');

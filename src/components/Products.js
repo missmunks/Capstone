@@ -10,7 +10,7 @@ const Products = ({ token, products, cart, setCart }) => {
         const response = await fetch(`api/products/${productId}`, {
             method: 'DELETE',
             headers: {
-                  'Authorization': `Bearer ${token}`
+                  'Authorization': `Bearer ${token}` 
                 }
               })
               console.log(response, 'rrrrrrrrrrresponse')
@@ -26,7 +26,9 @@ const Products = ({ token, products, cart, setCart }) => {
 			const productId=product.id
 			return <div key={product.id}>
 				<Product token={token} product={product} products={products} cart={cart} setCart={setCart}/>
-			<Link to='/AdminEditProduct />'>Edit Product</Link>
+				<Link to= '/AdminEditProduct'>
+					<button type="button">Edit Product</button>
+				</Link>
 			<button onClick={() => {handleDelete(productId)}}>Delete Product</button>
 			</div>
 		})}

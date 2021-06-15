@@ -15,6 +15,7 @@ const Nav = ({ token, setToken, setUser, user }) => {
 				{user.isAdmin ? <Link to='/users/add'>Add User</Link> : ""}
 				{user.isAdmin ? <Link to='/AdminAllOrders'>All Orders</Link> : ""}
 				{user.isAdmin ? <Link to= '/AdminAddProduct'>Add Product</Link> : ""}
+			
 				{ token && <Link to='/cart'>My Cart</Link> }
 				{!token && <Link to='/login'>Login/Register</Link>}
 				{ token && <Link to='/myaccount'>My Account</Link>}

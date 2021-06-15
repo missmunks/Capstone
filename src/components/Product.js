@@ -67,6 +67,7 @@ console.log(singleProduct);
 					<li>in stock? {singleProduct.inStock ? 'yes' : 'no' }</li>
 					<li>price: ${singleProduct.price}</li>
 					<button type='addToCart' onClick={handleAddToCart}>Add to Cart</button>
+					<Link to='/AdminEditProduct />'>Edit Product</Link>
 				</ul>
 			</div>
 	}

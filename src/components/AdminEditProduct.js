@@ -53,6 +53,7 @@ const AdminEditProduct = ({
     
         return (
             <>
+
             <form onSubmit={handleSubmit}>
             <input type="text" className='nameInput' value={name} onChange={(event) => {setName(event.target.value)}} placeholder='Product Name'></input>
                 <input type="text" className='descriptionInput' value={description} onChange={(event) => {setDescription(event.target.value)}} placeholder='Product Description'></input>

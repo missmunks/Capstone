@@ -1,7 +1,11 @@
 import React, {useState} from 'react';
+import {Product} from './'
 
 const AdminEditProduct = ({
     token,
+    id,
+    singleProduct,
+    product,
     products, 
     setProducts, 
     name, 
@@ -17,8 +21,10 @@ const AdminEditProduct = ({
     inStock, 
     setInStock}) => {
 
+     console.log(singleProduct, 'this is the single product that is passed in from the app fffffffffffffffffffffffffffffffffffffffffffffffffff')
+        console.log(product, '++++++++++++++++++++++++++++++++')
     const [productId, setProductId] = useState('')
-     
+     console.log(productId, '2222222222222222')
             const handleSubmit = async (ev) => {
             ev.preventDefault();
             const response = await fetch(`api/products/${productId}`, {
@@ -48,7 +54,8 @@ const AdminEditProduct = ({
                 const edited = alert("You have edited a product.")
             }
             
-       
+       console.log(id, '44444444444444444')
+       console.log(product, '5555555555555555')
     
     
         return (
@@ -61,11 +68,11 @@ const AdminEditProduct = ({
                 <input type="text" className='categoryInput' value={category} onChange={(event) => {setCategory(event.target.value)}} placeholder='Product Category'></input>
                 <input type="image" className='imageInput' value={imageURL} onChange={(event) => {setImageURL(event.target.value)}} placeholder='Product Image'></input>
                 <input type="checkbox" className='inStockInput' value={inStock} onChange={(event) => {setInStock(event.target.value)}} placeholder='Product In Stock? '></input>
-                <button>Add Product</button>
+                {/* <button>Add Product</button> */}
               <button type='submit' onClick={handleSubmit}>Edit</button>
             </form>
             </>
-            )
+            ) 
         }
 
 export default AdminEditProduct;

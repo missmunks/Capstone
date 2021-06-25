@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import { getProductById, createOrder, addToCart } from '../api/index.js';
 
-const Product = ({ product, cart, setCart, token}) => {
+const Product = ({ product, cart, setCart, token, singleProduct, setSingleProduct}) => {
 	const {id} = useParams();
-	const [singleProduct, setSingleProduct ] = useState(product ? product : {});
-console.log(singleProduct);
+	// const [singleProduct, setSingleProduct ] = useState(product ? product : {});
+
 	const getProduct = async (id) => {
 		try{
 			const theProduct = await getProductById(id);
@@ -19,7 +19,6 @@ console.log(singleProduct);
 		const getAndSetProduct = async () => {
 			const aProduct = await getProduct(id)
 			if(aProduct){
-			 setSingleProduct(aProduct)
 			}
 		}
 		if(id){
@@ -44,7 +43,12 @@ console.log(singleProduct);
 		}
 	}
 
+	
+	console.log(product, 'this is the product from the single product page')
+
+
 	if(product){
+		// setSingleProduct(product)
 		return <>
 			<h3 className='products-list-name'>
 				<Link to={`/products/${product.id}`}> {product.name} </Link>
@@ -54,11 +58,16 @@ console.log(singleProduct);
 				<li>in stock? {product.inStock ? 'yes' : 'no' }</li>
 				<li>price: ${product.price}</li>
 				<button  onClick={handleAddToCart}>Add to Cart</button>
+				<Link to={{pathname:'/AdminEditProduct', product:{product}}}>
+					<button type="button">Edit Product</button>
+				</Link>
+
 			</ul>
 		</>
 	}else{
 
-
+		setSingleProduct(singleProduct)
+		console.log(singleProduct, 'this is the single product forom the single product page ooooooooooooooooooooooooooooooooooooooooooooooooo');
 	return <div key={id}>
 				<h3 className='products-list-name'>{singleProduct.name}</h3>
 				<ul>
@@ -67,7 +76,10 @@ console.log(singleProduct);
 					<li>in stock? {singleProduct.inStock ? 'yes' : 'no' }</li>
 					<li>price: ${singleProduct.price}</li>
 					<button type='addToCart' onClick={handleAddToCart}>Add to Cart</button>
-					<Link to='/AdminEditProduct />'>Edit Product</Link>
+					<Link to='/AdminEditProduct' singleProduct={singleProduct} product={product} id={product.id}>
+					<button type="button">Edit Product</button>
+				</Link>
+				
 				</ul>
 			</div>
 	}

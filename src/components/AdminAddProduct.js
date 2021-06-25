@@ -5,13 +5,8 @@ import React, {useState} from 'react';
 
 
 // NEED TO MAKE CHECKBOX TO HAVE DESCRIPTION of inStock. ALSO, THIS SHOWS VISUALLY BUT DOES NOT ADD PRODUCT!!!
-const AdminAddProduct = ({token}) => {
-    const [name, setName] = useState('');
-    const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
-    const [imageURL, setImageURL]= useState('');
-    const [inStock, setInStock] = useState('');
-    const [category, setCategory]= useState('');
+const AdminAddProduct = ({token, name, setName, description, setDescription, price, setPrice, imageURL, setImageURL, inStock, setInStock, category, setCategory}) => {
+
 
     const createProduct = async () => {
         const response = await fetch(`api/products`, {

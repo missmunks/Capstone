@@ -36,6 +36,7 @@ import{
 const App = () => {
   const [message, setMessage] = useState('');
   const [products, setProducts] = useState([]);
+  const [singleProduct, setSingleProduct] = useState({});
   const [allUsers, setAllUsers] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -200,11 +201,11 @@ const App = () => {
 				{<Home user={user} />}
 			</Route>
 			<Route exact path='/products'>
-				<Products token={token} products={products} setProducts={setProducts} cart={cart} setCart={setCart}/>
+				<Products token={token} products={products} setProducts={setProducts} cart={cart} setCart={setCart} singleProduct={singleProduct} setSingleProduct={setSingleProduct}/>
 			</Route>
 
 			<Route exact path={`/products/:id`}>
-				<Product token={token} products={products} />
+				<Product token={token} products={products} singleProduct={singleProduct} setSingleProduct={setSingleProduct}/>
 			</Route>
 
 			<Route exact path='/register'>
@@ -260,7 +261,7 @@ const App = () => {
 			</Route>
 
 			<Route exact path='/AdminEditProduct' >
-				<AdminEditProduct token={token} name={name} setName={setName} description={description} setDescription={setDescription} price={price} setPrice={setPrice} imageURL={imageURL} setImageURL={setImageURL} category={category} setCategory={setCategory} inStock={inStock} setInStock={setInStock} />
+				<AdminEditProduct singleProduct={singleProduct} setSingleProduct={setSingleProduct} token={token} name={name} setName={setName} description={description} setDescription={setDescription} price={price} setPrice={setPrice} imageURL={imageURL} setImageURL={setImageURL} category={category} setCategory={setCategory} inStock={inStock} setInStock={setInStock} />
 			</Route>
     </div>
 
